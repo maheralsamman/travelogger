@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Trips = require('./models/trips');
+const Trip = require('./models/trips');
 
 const query = cb => async params => {
     await mongoose.connect(process.env.MONGO_ACCESS, { useNewUrlParser: true , useUnifiedTopology: true});
@@ -21,9 +21,9 @@ const query = cb => async params => {
     }
 }
 
-const getAll = query(() => Trips.find({}));
+const getAll = query(() => Trip.find({}).exec());
 
-const makeDummy = query(() => Trips.create({
+const makeDummy = query(() => new Trip({
         userId: "dummyid",
         country: "acountry",
         stops: [{
@@ -32,6 +32,6 @@ const makeDummy = query(() => Trips.create({
             imageUrl: "aurl",
             description: "adescription",
         }],
-}))
+}).save())
 
 module.exports = { getAll, makeDummy }
