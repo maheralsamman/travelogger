@@ -7,5 +7,8 @@ export const store = configureStore({
     trips: tripReducer,
     user: userReducer
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false
+  }),
   devTools: true
 })

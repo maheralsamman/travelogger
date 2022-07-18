@@ -1,23 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {};
-
 export const userSlice = createSlice({
   name: 'user',
-  initialState,
+  initialState: {
+    user: {}
+  },
   reducers: {
-    increment: (state) => {
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
-    },
+    setUser: (state, action) => {
+        state.user = action.payload
+    }
   },
 })
 
-export const { increment, decrement, incrementByAmount } = userSlice.actions
+export const { setUser } = userSlice.actions
+export const selectUser = state => state.user
 
 export default userSlice.reducer
