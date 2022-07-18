@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade } from "swiper";
 import styles from "./Trip.module.css";
 import 'swiper/css';
+import "swiper/css/effect-fade";
 
 const DUMMY = {
     userId: "s0m3Us3riD",
@@ -39,6 +40,7 @@ const Trip = () => {
     const [citySlave, setCitySlave] = useState(null);
     const [backgroundSlave, setBackgroundSlave] = useState(null);
     const [foregroundSlave, setForegroundSlave] = useState(null);
+    const [control, setControl] = useState(null);
     const [index, setIndex] = useState(0);
 
     const [cities, cityIndexes] = (() => {
@@ -57,7 +59,7 @@ const Trip = () => {
     })();
 
     useEffect(() => {
-        if ([citySlave, backgroundSlave, foregroundSlave].some(slave => !slave)) {
+        if ([citySlave, backgroundSlave, foregroundSlave, control].some(slave => !slave)) {
             return;
         };
         citySlave.slideTo(cityIndexes[index]);
@@ -74,11 +76,12 @@ const Trip = () => {
                 allowTouchMove={false}
             >
                 {DUMMY.stops.map(stop => (
-                    <SwiperSlide key={stop.sublocation} className={styles["background-swiper"]}>
+                    <SwiperSlide key={stop.sublocation}>
                         <img className={styles["background-swiper--image"]} src={stop.imageUrl} alt={stop.sublocation}/>
                     </SwiperSlide>
                 ))}
             </Swiper>
+            <div className={styles.filter}/>
             <div className={styles.container}>
                 <p className={styles.country}>{DUMMY.country}</p>
                 <Swiper
@@ -92,7 +95,27 @@ const Trip = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+                <Swiper
+                    onInit={setForegroundSlave}
+                    className={styles["foreground-swiper"]}
+                    allowTouchMove={false}
+                >
+                    {DUMMY.stops.map(stop => (
+                        <SwiperSlide key={stop.sublocation}>
+                            <img className={styles["foreground-swiper--image"]} src={stop.imageUrl} alt={stop.sublocation}/>
+                            <p className={styles.sublocation}>{stop.sublocation}</p>
+                            <p className={styles.description}>{stop.description}</p>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
             </div>
+            <Swiper
+                onInit={setControl}
+                onRealIndexChange={swiper => setIndex(swiper.realIndex)}
+                className={styles["control-swiper"]}
+            >
+                {DUMMY.stops.map((_, i) => <SwiperSlide className={styles["control-swiper--slide"]} key={i}/>)}
+            </Swiper>
         </>
     )
 }

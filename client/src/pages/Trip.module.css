@@ -2,18 +2,32 @@
     position: absolute;
     inset: 0;
     display: grid;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(2, 2em) 1fr repeat(2, 2em);
     padding-inline: 2em;
+    overflow: hidden;
 }
 
 .background-swiper {
-    opacity: 10%;
     height: 100%;
+    width: 100%;
+}
+
+.background-swiper * {
+    z-index: -100;
 }
 
 .background-swiper--image {
     height: 100%;
+    width: 100%;
     object-fit: cover;
+}
+
+.filter {
+    position: absolute;
+    inset: 0;
+    background-color: white;
+    opacity: 0.9;
+    z-index: 1;
 }
 
 .country {
@@ -23,6 +37,7 @@
     align-items: flex-end;
     width: 100%;
     border-bottom: 1px solid black;
+    z-index: 100;
 }
 
 .city-swiper {
@@ -31,4 +46,36 @@
 
 .city {
     text-align: right;
+}
+
+.foreground-swiper {
+    width: 100%;
+    position: relative;
+}
+
+.foreground-swiper--image {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.sublocation {
+    text-align: center;
+}
+
+.description {
+    text-align: justify;
+    padding-inline: 1em;
+    font-style: italic;
+}
+
+.control-swiper {
+    position: absolute !important;
+    inset: 0;
+    z-index: 300;
+}
+
+.control-swiper--slide {
+    height: 100%;
+    z-index: 500 !important;
 }
