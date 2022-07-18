@@ -2,9 +2,14 @@
     position: absolute;
     inset: 0;
     display: grid;
-    grid-template-rows: repeat(2, 2em) 1fr repeat(2, 2em);
+    grid-template-rows: repeat(3, min-content) 1fr 4em 3em;
     padding-inline: 2em;
     overflow: hidden;
+}
+
+.back {
+    z-index: 300;
+    width: min-content;
 }
 
 .background-swiper {
@@ -31,7 +36,8 @@
 }
 
 .country {
-    font-size: 2em;
+    font-size: 2.5em;
+    font-weight: bold;
     text-align: left;
     display: flex;
     align-items: flex-end;
@@ -53,7 +59,13 @@
     position: relative;
 }
 
+.foreground-swiper {
+    display: grid;
+    grid-template-rows: 1fr 2em 5em;
+}
+
 .foreground-swiper--image {
+    padding: 1em;
     width: 100%;
     object-fit: cover;
     aspect-ratio: 1 / 1;
@@ -61,6 +73,8 @@
 
 .sublocation {
     text-align: center;
+    font-size: 1.2em;
+    margin-bottom: .8em;
 }
 
 .description {
@@ -71,11 +85,20 @@
 
 .control-swiper {
     position: absolute !important;
-    inset: 0;
-    z-index: 300;
+    inset: 1em 0 0 3em;
+}
+
+.control-swiper * {
+    z-index: 500 !important;
 }
 
 .control-swiper--slide {
     height: 100%;
-    z-index: 500 !important;
+}
+
+.reset {
+    z-index: 100;
+    background: none;
+    border: none;
+    font-size: 1.2em;
 }

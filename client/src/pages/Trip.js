@@ -5,6 +5,8 @@ import styles from "./Trip.module.css";
 import 'swiper/css';
 import "swiper/css/effect-fade";
 
+import Progress from '../components/Progress';
+
 const DUMMY = {
     userId: "s0m3Us3riD",
     country: "England",
@@ -66,6 +68,11 @@ const Trip = () => {
         [backgroundSlave, foregroundSlave].forEach(slave => slave.slideTo(index));
     }, [index])
 
+    const reset = () => {
+        setIndex(0);
+        control.slideTo(0)
+    }
+
     return (
         <>
             <Swiper
@@ -83,6 +90,7 @@ const Trip = () => {
             </Swiper>
             <div className={styles.filter}/>
             <div className={styles.container}>
+                <div className={styles.back}>Back</div>
                 <p className={styles.country}>{DUMMY.country}</p>
                 <Swiper
                     onInit={setCitySlave}
@@ -108,6 +116,11 @@ const Trip = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+                <Progress stops={DUMMY.stops.map(({city}) => city)} index={index}/>
+                {index === DUMMY.stops.length - 1
+                    ? <button className={styles.reset} onClick={reset}>Go back to start</button>
+                    : null
+                }
             </div>
             <Swiper
                 onInit={setControl}

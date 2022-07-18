@@ -1,0 +1,48 @@
+.container {
+    height: 100%;
+    width: 100%;
+    z-index: 200;
+    position: relative;
+    touch-action: none;
+}
+
+.line {
+    width: 100%;
+    height: 5px;
+    margin: 0;
+    background-color: #0091AD;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dot-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dot {
+    background-color: #0091AD;
+    width: 30px;
+    height: 30px;
+    z-index: 300;
+    margin: 0;
+    border-radius: 50%;
+}
+
+.pin-container {
+    width: 100%;
+    position: relative;
+}
+
+.pin {
+    width: 30px;
+    position: absolute;
+    top: -15px;
+    transition: .5s all;
+}
