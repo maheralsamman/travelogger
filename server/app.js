@@ -7,6 +7,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const cloudinaryRouter = require("./routes/cloudinary")
+const tripRouter = require("./routes/trip")
 
 const app = express();
 
@@ -17,6 +18,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/cloudinary', cloudinaryRouter);
+const router = express.Router()
+
+router.use('/cloudinary', cloudinaryRouter);
+router.use('/trips', tripRouter)
+
+app.use("/api", router)
 
 module.exports = app;

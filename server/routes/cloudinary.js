@@ -12,18 +12,15 @@ cloudinary.config({
 });
 
 const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
+    cloudinary,
     params: {
         folder: "TRAVELOGGER",
     },
 });
 
 const upload = multer({ storage });
-
 router.use(upload.single('photo'));
 
-/* POST picture */
-// upload.single("photo")
 router.post("/", async (req, res) => {
     return res.json({ picture: req.file.path });
   });
