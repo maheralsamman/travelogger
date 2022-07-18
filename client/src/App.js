@@ -1,12 +1,22 @@
 import './App.css';
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login"
 // import ImageUpload from "./components/ImageUpload"
 
 function App() {
   return (
     <div className="App">
-      <Login/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Homepage/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/all" element={<AllTrips/>}/>
+          <Route path="/user" element={<UserTrips/>}/>
+          <Route path="/create" element={<Create/>}/>
+          <Route path="/edit/:tripId" element={<Edit/>}/>
+          <Route path="/:tripId" element={<Trip/>}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
