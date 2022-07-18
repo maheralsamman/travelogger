@@ -9,9 +9,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Homepage/>}/>
+          <Route path="/view" element={<NavWrapper/>}>
+            <Route path="/all" element={<AllTrips/>}/>
+            <Route path="/user" element={<UserTrips/>}/>
+          </Route>
           <Route path="/login" element={<Login/>}/>
-          <Route path="/all" element={<AllTrips/>}/>
-          <Route path="/user" element={<UserTrips/>}/>
           <Route path="/create" element={<Create/>}/>
           <Route path="/edit/:tripId" element={<Edit/>}/>
           <Route path="/:tripId" element={<Trip/>}/>
