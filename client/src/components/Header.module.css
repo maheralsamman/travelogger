@@ -1,0 +1,17 @@
+.header{
+    color:black;
+    background-color: #FFF4E4;
+    height: 9vh;
+}
+
+.header__logo{
+    position: absolute;
+    height: 70px;
+    left: 15px;
+}
+
+.header__title{
+    text-align: center;
+    margin: 0;
+    padding-top: 15px;
+}

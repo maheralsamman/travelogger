@@ -1,0 +1,48 @@
+.homepage__backgroung{
+    background-image: url("../assets/female-tourists.webp");
+    height: 91vh;
+    background-size: 850px 100%;
+    background-position-x: -232px;
+    background-repeat: no-repeat;
+    background-position-y: -110px;
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+    opacity: .8;
+}
+
+.main {
+}
+
+.main__title {
+    position: absolute;
+    top: 21vh;
+    width: 210px;
+    left: 20px;
+    font-size: 28px;
+    font-weight: 300;
+    margin: 0;
+}
+.main__createButton {
+    position: absolute;
+    top: 34vh;
+    left: 50px;
+    padding: 10px;
+    background-color: rgb(255 87 187 / 60%);
+    border-radius: 12px;
+    border: none;
+    padding-inline: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.main__browseButton {
+    position: absolute;
+    top: 41vh;
+    left: 50px;
+    padding: 10px;
+    background-color: #0091ad99;
+    border-radius: 12px;
+    border: none;
+    padding-inline: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
