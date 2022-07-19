@@ -13,14 +13,14 @@ router.post("/", async (req, res) => {
     return res.json({trip})
 })
 
-router.put("/:id", async (req, res) => {
-    const userId = req.params.id
-    const updatedTrip = await db.updateTrip(userId, req.body);
+router.put("/:tripId", async (req, res) => {
+    const id = req.params.tripId
+    const updatedTrip = await db.updateTrip(id, req.body);
     return res.json({updatedTrip})
 })
 
-router.delete("/:id", async (req, res) => {
-  const id = req.params.id;
+router.delete("/:tripId", async (req, res) => {
+  const id = req.params.tripId;
   await db.deleteTrip(id)
   return res.status(204).end()
 })

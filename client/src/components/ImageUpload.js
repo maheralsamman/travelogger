@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import style from "./ImageUpload.module.css";
 
-// const url = "https://www.planetware.com/photos-large/ENG/england-stonehenge.jpg";
-const url = '';
+const url = "https://www.planetware.com/photos-large/ENG/england-stonehenge.jpg";
+// const url = '';
+
+const DEFAULT_MESSAGE = 'Tap to upload (max 5mb)'
 
 const ImageUpload = () => {
     const [fileUrl, setFileUrl] = useState(url || null);
     const [uploading, setUploading] = useState(false)
-    const [msg, setMsg] = useState('Tap to upload (max 5mb)');
+    const [msg, setMsg] = useState(DEFAULT_MESSAGE);
     const handleAddFile = async e => {
         const file = e.target.files[0];
         if (file.size > 1024 * 1024 * 5) {
@@ -29,6 +31,7 @@ const ImageUpload = () => {
             })
             const { url } = await result.json()
             setUploading(false)
+            setMsg(DEFAULT_MESSAGE)
             setFileUrl(url)
         } catch(e) {
             setUploading(false)
