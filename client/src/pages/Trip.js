@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade } from "swiper";
 import styles from "./Trip.module.css";
@@ -39,6 +40,7 @@ const DUMMY = {
 }
 
 const Trip = () => {
+    const navigate = useNavigate();
     const [citySlave, setCitySlave] = useState(null);
     const [backgroundSlave, setBackgroundSlave] = useState(null);
     const [foregroundSlave, setForegroundSlave] = useState(null);
@@ -90,7 +92,7 @@ const Trip = () => {
             </Swiper>
             <div className={styles.filter}/>
             <div className={styles.container}>
-                <div className={styles.back}>Back</div>
+                <button className={styles.back} onClick={() => navigate(-1)}>Back</button>
                 <p className={styles.country}>{DUMMY.country}</p>
                 <Swiper
                     onInit={setCitySlave}
