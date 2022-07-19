@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   });
 
 router.post("/", async (req, res) => {
-    const trip = await db.makeDummy();
+    const trip = await db.postTrip(req.body);
     return res.json({trip})
 })
 

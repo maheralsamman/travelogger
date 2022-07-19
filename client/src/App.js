@@ -1,11 +1,39 @@
+import { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { getAlltrips, postTrip } from './redux/tripSlice';
+import { useDispatch, useSelector } from "react-redux";
 
 import Trip from './pages/Trip';
 import Login from "./components/Login"
 // import ImageUpload from "./components/ImageUpload"
 
+
 function App() {
+const dispatch = useDispatch();
+
+/* const dummy = {
+  "userId": "daoudiscool4",
+  "country": "newTestnewacountry",
+  "stops": [{
+      "city": "notnewacity",
+      "sublocation": "notnewasublocation",
+      "imageUrl": "notnewaurl",
+      "description": "notnewadescription"
+  }]
+}
+  const trips = useSelector(state => state.trips)
+  useEffect(() => {
+    const addTrips = () => {
+      // dispatch(getAlltrips())
+     dispatch(postTrip(dummy))
+    };
+    addTrips()
+    console.log(trips)
+  }, []); */
+
+
+
   return (
     <div className="App">
       <Router>

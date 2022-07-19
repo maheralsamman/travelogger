@@ -22,8 +22,9 @@ const query = cb => async params => {
 }
 
 const getAll = query(() => Trip.find({}).exec());
+const postTrip = query((body) => new Trip(body).save())
 
-const makeDummy = query(() => new Trip({
+/* const makeDummy = query(() => new Trip({
         userId: "dummyid",
         country: "acountry",
         stops: [{
@@ -32,6 +33,7 @@ const makeDummy = query(() => new Trip({
             imageUrl: "aurl",
             description: "adescription",
         }],
-}).save())
+}).save()) */
 
-module.exports = { getAll, makeDummy }
+
+module.exports = { getAll, postTrip  }
