@@ -18,11 +18,10 @@ const storage = new CloudinaryStorage({
     },
 });
 
-const upload = multer({ storage });
-router.use(upload.single('photo'));
+router.use(multer({ storage }).single('photo'));
 
 router.post("/", async (req, res) => {
-    return res.json({ picture: req.file.path });
+    return res.json({ url: req.file.path });
   });
 
 module.exports = router;

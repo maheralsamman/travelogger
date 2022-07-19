@@ -36,6 +36,28 @@ export const postTrip = createAsyncThunk('postTrip',
   }
 );
 
+export const updateTrip = createAsyncThunk('updateTrip',
+  async (id) => {
+        const trips = await fetch(urlTrips, {
+          method: 'PUT',
+          body: JSON.stringify(trip),
+          headers:{
+            'Content-Type': 'application/json',
+          }
+        });
+        const data = await trips.json();
+          return data;
+  },
+  {
+    condition: (_ , { getState }) => {
+      const { trips } = getState()
+      if (trips.loading) {
+        return false
+      }
+    }
+  }
+);
+
 
 const initialState = { loading: false, hasError: false, error: '', trips: [] };
 

@@ -18,11 +18,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const router = express.Router()
-
-router.use('/cloudinary', cloudinaryRouter);
-router.use('/trips', tripRouter)
-
-app.use("/api", router)
+app.use('/api/cloudinary', cloudinaryRouter);
+app.use('/api/trips', tripRouter)
 
 module.exports = app;
