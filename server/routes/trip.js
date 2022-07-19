@@ -14,14 +14,14 @@ router.post("/", async (req, res) => {
 })
 
 router.put("/:tripId", async (req, res) => {
-    const id = req.params.tripId
-    const updatedTrip = await db.updateTrip(id, req.body);
+    const tripId = req.params.tripId
+    const updatedTrip = await db.updateTrip(tripId, req.body);
     return res.json({updatedTrip})
 })
 
 router.delete("/:tripId", async (req, res) => {
   const id = req.params.tripId;
   await db.deleteTrip(id)
-  return res.status(204).end()
+  return res.status(200).json({msg:"trip is deleted"})
 })
 module.exports = router;
