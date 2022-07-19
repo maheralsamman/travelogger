@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Homepage from './pages/Homepage';
 import Trip from './pages/Trip';
-import Login from "./components/Login"
+import Login from "./pages/Login"
 import Create from './pages/Create';
+import AllTrips from './pages/AllTrips';
+import NavWrapper from './components/NavWrapper';
 // import ImageUpload from "./components/ImageUpload"
 
 
@@ -34,17 +36,15 @@ const dispatch = useDispatch();
     console.log(trips)
   }, []); */
 
-
-
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route path="/" element={<Homepage/>}/>
-          {/* <Route path="/view" element={<NavWrapper/>}>
-            <Route path="/all" element={<AllTrips/>}/>
-            <Route path="/user" element={<UserTrips/>}/>
-          </Route> */}
+          <Route path="/view" element={<NavWrapper/>}>
+            <Route path="all" element={<AllTrips/>}/>
+            {/* <Route path="/user" element={<UserTrips/>}/> */}
+          </Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/create" element={<Create/>}/>
           {/* <Route path="/edit/:tripId" element={<Edit/>}/> */}
