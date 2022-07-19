@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import style from "./ImageUpload.module.css";
 
-const url = "https://www.planetware.com/photos-large/ENG/england-stonehenge.jpg";
-// const url = '';
+// const url = "https://www.planetware.com/photos-large/ENG/england-stonehenge.jpg";
+const url = '';
 
 const DEFAULT_MESSAGE = 'Tap to upload (max 5mb)'
 

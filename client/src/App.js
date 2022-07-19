@@ -14,29 +14,29 @@ import NavWrapper from './components/NavWrapper';
 
 
 function App() {
-const dispatch = useDispatch();
+// const dispatch = useDispatch();
 
- const dummy = {
-  "userId": "Maheriscool4",
-  "country": "sweden",
-  "stops": [{
-      "city": "umeå",
-      "sublocation": "notnewasublocation",
-      "imageUrl": "notnewaurl",
-      "description": "notnewadescription"
-  }]
-}
-  const trips = useSelector(state => state.trips)
-  useEffect(() => {
-    const updateTrips = () => {
-       dispatch(getAlltrips())
-      const id = "62d69b0799ebd14af29fdaa0";
-     //dispatch(updateTrip({id , updatedTrip:dummy}))
-     //dispatch(deleteTrip(id))
-    };
-    updateTrips()
-    console.log(trips)
-  }, []); 
+//  const dummy = {
+//   "userId": "Maheriscool4",
+//   "country": "sweden",
+//   "stops": [{
+//       "city": "umeå",
+//       "sublocation": "notnewasublocation",
+//       "imageUrl": "notnewaurl",
+//       "description": "notnewadescription"
+//   }]
+// }
+//   const trips = useSelector(state => state.trips)
+//   useEffect(() => {
+//     const updateTrips = () => {
+//        dispatch(getAlltrips())
+//       const id = "62d69b0799ebd14af29fdaa0";
+//      //dispatch(updateTrip({id , updatedTrip:dummy}))
+//      //dispatch(deleteTrip(id))
+//     };
+//     updateTrips()
+//     console.log(trips)
+//   }, []); 
 
   return (
     <div className="App">
@@ -45,7 +45,7 @@ const dispatch = useDispatch();
           <Route path="/" element={<Homepage/>}/>
           <Route path="/view" element={<NavWrapper/>}>
             <Route path="all" element={<AllTrips/>}/>
-            {/* <Route path="/user" element={<UserTrips/>}/> */}
+            {/* <Route path="mytrips" element={<UserTrips/>}/> */}
           </Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/create" element={<Create/>}/>
