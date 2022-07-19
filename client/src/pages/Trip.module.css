@@ -85,11 +85,8 @@
 
 .control-swiper {
     position: absolute !important;
-    inset: 1em 0 0 3em;
-}
-
-.control-swiper * {
     z-index: 500 !important;
+    inset: 1em 0 3em;
 }
 
 .control-swiper--slide {

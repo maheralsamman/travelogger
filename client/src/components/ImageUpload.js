@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
+const URL = "https://www.planetware.com/photos-large/ENG/england-stonehenge.jpg";
+
 const ImageUpload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
+    const [msg, setMsg] = useState('Tap to upload (max size 5mb)');
     const handleSubmit = async e => {
         e.preventDefault();
         // if (selectedFile.size > 1024 * 1024 * 5) {
@@ -16,11 +19,19 @@ const ImageUpload = () => {
         // const data = await result.json();
         // console.log(data)
     }
+    const handleAddFile = e => {
+        const file = e.target.files[0];
+        if (file.size > 1024 * 1024 * 5) {
+            setMsg("File too large, please try again");
+            return;
+        }
+        setSelectedFile(file);
+    }
     return (
         <form onSubmit={handleSubmit}>
             <input
                 type="file"
-                onChange={(e) => setSelectedFile(e.target.files[0])}
+                onChange={handleAddFile}
             />
             <button type="submit">Submit</button>
         </form>

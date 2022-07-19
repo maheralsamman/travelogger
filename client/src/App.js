@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Trip from './pages/Trip';
 import Login from "./components/Login"
+import Create from './pages/Create';
 // import ImageUpload from "./components/ImageUpload"
 
 
@@ -45,8 +46,8 @@ const dispatch = useDispatch();
             <Route path="/user" element={<UserTrips/>}/>
           </Route> */}
           <Route path="/login" element={<Login/>}/>
-          {/* <Route path="/create" element={<Create/>}/>
-          <Route path="/edit/:tripId" element={<Edit/>}/> */}
+          <Route path="/create" element={<Create/>}/>
+          {/* <Route path="/edit/:tripId" element={<Edit/>}/> */}
           <Route path="/trip/:tripId" element={<Trip/>}/>
         </Routes>
       </Router>
