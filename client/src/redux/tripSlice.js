@@ -38,15 +38,15 @@ export const postTrip = createAsyncThunk('postTrip',
 
 export const updateTrip = createAsyncThunk('updateTrip',
   async (id) => {
-        const trips = await fetch(urlTrips, {
-          method: 'PUT',
-          body: JSON.stringify(trip),
-          headers:{
-            'Content-Type': 'application/json',
-          }
-        });
-        const data = await trips.json();
-          return data;
+        // const trips = await fetch(urlTrips, {
+        //   method: 'PUT',
+        //   body: JSON.stringify(trip),
+        //   headers:{
+        //     'Content-Type': 'application/json',
+        //   }
+        // });
+        // const data = await trips.json();
+        //   return data;
   },
   {
     condition: (_ , { getState }) => {

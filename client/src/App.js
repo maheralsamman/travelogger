@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { getAlltrips, postTrip } from './redux/tripSlice';
 import { useDispatch, useSelector } from "react-redux";
 
+import Homepage from './pages/Homepage';
 import Trip from './pages/Trip';
 import Login from "./components/Login"
 import Create from './pages/Create';
@@ -39,9 +40,8 @@ const dispatch = useDispatch();
     <div className="App">
       <Router>
         <Routes>
-        <Route path="/" element={<p>Homepage</p>}/>
-          {/* <Route path="/" element={<Homepage/>}/>
-          <Route path="/view" element={<NavWrapper/>}>
+          <Route path="/" element={<Homepage/>}/>
+          {/* <Route path="/view" element={<NavWrapper/>}>
             <Route path="/all" element={<AllTrips/>}/>
             <Route path="/user" element={<UserTrips/>}/>
           </Route> */}
