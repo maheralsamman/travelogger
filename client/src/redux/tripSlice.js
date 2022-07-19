@@ -37,27 +37,28 @@ export const postTrip = createAsyncThunk('postTrip',
 );
 
 export const updateTrip = createAsyncThunk('updateTrip',
-  async (id) => {
-        // const trips = await fetch(urlTrips, {
-        //   method: 'PUT',
-        //   body: JSON.stringify(trip),
-        //   headers:{
-        //     'Content-Type': 'application/json',
-        //   }
-        // });
-        // const data = await trips.json();
-        //   return data;
+  async ({id, updatedTrip}) => {
+    console.log("here", id, updatedTrip);
+         const trip = await fetch(`${urlTrips}/${id}`, {
+           method: 'PUT',
+           body: JSON.stringify(updatedTrip),
+           headers:{
+            'Content-Type': 'application/json',
+           }
+         });
+         const data = await trip.json();
+           return {id, data};
   },
-  {
-    condition: (_ , { getState }) => {
-      const { trips } = getState()
-      if (trips.loading) {
-        return false
-      }
-    }
-  }
 );
 
+export const deleteTrip = createAsyncThunk('deleteTrip',
+  async (id) => {
+    //console.log("here", id, updatedTrip);
+         await fetch(`${urlTrips}/${id}`, {
+          method: 'DELETE'
+         });
+  },
+);
 
 const initialState = { loading: false, hasError: false, error: '', trips: [] };
 
@@ -97,6 +98,39 @@ export const tripSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(postTrip.pending, state => {
+        console.log("pending")
+        state.loading = true;
+      })
+      .addCase(updateTrip.fulfilled, (state, action) => {
+        console.log("fulfilled", action.payload)
+        state.trips.filter(trip => trip._id !== action.payload.id)
+        state.trips.push(action.payload.data.updatedTrip)
+        state.loading = false;
+        state.hasError = false;
+      })
+      .addCase(updateTrip.rejected, (state, action) => {
+        console.log("rejected" , action.payload)
+        state.loading = false;
+        state.hasError = true;
+        state.error = action.error.message;
+      })
+      .addCase(updateTrip.pending, state => {
+        console.log("pending")
+        state.loading = true;
+      })
+      .addCase(deleteTrip.fulfilled, (state, action) => {
+        console.log("fulfilled", action.payload)
+        state.trips.filter(trip => trip._id !== action.payload.id)
+        state.loading = false;
+        state.hasError = false;
+      })
+      .addCase(deleteTrip.rejected, (state, action) => {
+        console.log("rejected" , action.payload)
+        state.loading = false;
+        state.hasError = true;
+        state.error = action.error.message;
+      })
+      .addCase(deleteTrip.pending, state => {
         console.log("pending")
         state.loading = true;
       });

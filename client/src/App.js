@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { getAlltrips, postTrip } from './redux/tripSlice';
+import { getAlltrips, postTrip, updateTrip, deleteTrip } from './redux/tripSlice';
 import { useDispatch, useSelector } from "react-redux";
 
 import Homepage from './pages/Homepage';
@@ -16,11 +16,11 @@ import NavWrapper from './components/NavWrapper';
 function App() {
 const dispatch = useDispatch();
 
-/* const dummy = {
-  "userId": "daoudiscool4",
-  "country": "newTestnewacountry",
+ const dummy = {
+  "userId": "Maheriscool4",
+  "country": "sweden",
   "stops": [{
-      "city": "notnewacity",
+      "city": "umeå",
       "sublocation": "notnewasublocation",
       "imageUrl": "notnewaurl",
       "description": "notnewadescription"
@@ -28,13 +28,15 @@ const dispatch = useDispatch();
 }
   const trips = useSelector(state => state.trips)
   useEffect(() => {
-    const addTrips = () => {
-      // dispatch(getAlltrips())
-     dispatch(postTrip(dummy))
+    const updateTrips = () => {
+       dispatch(getAlltrips())
+      const id = "62d69b0799ebd14af29fdaa0";
+     //dispatch(updateTrip({id , updatedTrip:dummy}))
+     //dispatch(deleteTrip(id))
     };
-    addTrips()
+    updateTrips()
     console.log(trips)
-  }, []); */
+  }, []); 
 
   return (
     <div className="App">
