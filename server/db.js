@@ -9,7 +9,7 @@ const query = cb => async (...params) => {
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
     try {
         const result = await Promise.race([
-            cb(...params),
+            cb(params),
             new Promise((_, rej) => setTimeout(() => rej(new Error("Timed out")), 10000))
         ]);
         await mongoose.connection.close();
@@ -26,7 +26,7 @@ const getAll = query(() => Trip.find({}).exec());
 const postTrip = query((body) => new Trip(body).save())
 
 const updateTrip = query((id, body) => 
-Trip.findOneAndUpdate({ _id: id }, body, { new: true }).exec()
+Trip.findOneAndUpdate({ userId:id }, body, { new: true }).exec()
 )
 
 const deleteTrip = query((id)=> Trip.deleteOne({_id: id}).exec())
