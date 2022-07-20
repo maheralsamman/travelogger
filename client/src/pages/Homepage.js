@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
+import Background from "../components/Background";
 import style from "./Homepage.module.css"
 
 const Homepage = () => {
@@ -15,7 +16,7 @@ const Homepage = () => {
     return (
         <div className={style.homepage}>
             <Header />
-            <div className={style.homepage__backgroung}></div>
+            <Background/>
             <main className={style.main}>
             <h3 className={style.main__title}>Where would we take you today?</h3>
             <button className={style.main__createButton} onClick={directToLogin}>Create a trip</button>

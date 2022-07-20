@@ -1,18 +1,3 @@
-.homepage__backgroung{
-    background-image: url("../assets/female-tourists.webp");
-    height: 91vh;
-    background-size: 850px 100%;
-    background-position-x: -232px;
-    background-repeat: no-repeat;
-    background-position-y: -110px;
-    filter: blur(1px);
-    -webkit-filter: blur(1px);
-    opacity: .8;
-}
-
-.main {
-}
-
 .main__title {
     position: absolute;
     top: 21vh;

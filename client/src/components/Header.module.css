@@ -1,17 +1,62 @@
 .header{
     color:black;
     background-color: #FFF4E4;
-    height: 9vh;
+    height: 80px;
+    position: relative;
+}
+
+.header__backButton {
+    position: absolute;
+    left: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.header__homeLink {
+    width: min-content;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .header__logo{
-    position: absolute;
-    height: 70px;
-    left: 15px;
+    height: 40px;
+    position: relative;
+    margin-right: -2px;
+    z-index: -1;
 }
 
 .header__title{
     text-align: center;
     margin: 0;
-    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header__sign {
+    position: absolute;
+    right: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header__signin{
+font-size: 50px;
+position: relative;
+top: 5px;
+}
+.header__signOut{
+    font-size: 50px;
+    position: relative;
+top: 5px;
 }

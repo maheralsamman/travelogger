@@ -3,17 +3,13 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
 import firebase from "../firebase";
+import Header from "./Header";
 
 const NavWrapper = () => {
     const { user } = useSelector(selectUser);
     return (
         <>
-            <header>
-                <Link to="/">Travelogger</Link>
-                {user
-                    ? <button onClick={() => firebase.client.auth().signOut()}>Sign out</button>
-                    : <Link to="/login">Sign in</Link>}
-            </header>
+            <Header/>
             <Outlet/>
             <footer>
                 Buttons

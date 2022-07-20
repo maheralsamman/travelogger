@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/userSlice';
 import firebase from "../firebase"
 import styles from "./Login.module.css"
+import Header from '../components/Header';
+import Background from '../components/Background';
 
 const Login = () => {
     const { user } = useSelector(selectUser)
@@ -15,9 +17,13 @@ const Login = () => {
       }
     }, [user])
     return (
-      <div className={styles.container}>
-        <StyledFirebaseAuth uiConfig={firebase.uiConfig} firebaseAuth={firebase.client.auth()} />
-      </div>
+      <>
+        <Header/>
+        <Background/>
+        <div className={styles.container}>
+          <StyledFirebaseAuth uiConfig={firebase.uiConfig} firebaseAuth={firebase.client.auth()} />
+        </div>
+      </>
     );
 }
 

@@ -1,0 +1,13 @@
+.background{
+    background-image: url("../assets/female-tourists.webp");
+    position: absolute;
+    inset: 80px 0 0;
+    /* background-position-x: -232px;
+    background-repeat: no-repeat;
+    background-position-y: -110px; */
+    background-size: cover;
+    background-position-x: 60%;
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+    opacity: .8;
+}

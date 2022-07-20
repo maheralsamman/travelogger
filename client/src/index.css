@@ -11,3 +11,9 @@ html, body, .App, #root {
 p {
   margin-block: 0;
 }
+
+a, a:visited, a:active {
+  color: black;
+  text-decoration: none;
+
+}
