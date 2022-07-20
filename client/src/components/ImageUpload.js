@@ -7,6 +7,7 @@ const ImageUpload = ({fileUrl, setFileUrl}) => {
     const [uploading, setUploading] = useState(false)
     const [msg, setMsg] = useState(DEFAULT_MESSAGE);
     const handleAddFile = async e => {
+        console.log("CHANGED")
         const file = e.target.files[0];
         if (file.size > 1024 * 1024 * 5) {
             setMsg("File too large (max 5mb)");
@@ -19,6 +20,7 @@ const ImageUpload = ({fileUrl, setFileUrl}) => {
         }
         setUploading(true)
         try {
+            console.log("UPLOADING")
             const formData = new FormData();
             formData.append("photo", file);
             const result = await fetch("http://localhost:3001/api/cloudinary", {
@@ -29,6 +31,7 @@ const ImageUpload = ({fileUrl, setFileUrl}) => {
             setUploading(false)
             setMsg(DEFAULT_MESSAGE)
             setFileUrl(url)
+            e.target.value = null;
         } catch(e) {
             setUploading(false)
             console.log(e.message)
