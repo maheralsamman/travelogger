@@ -2,27 +2,12 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { selectUser } from "../redux/userSlice"
-import ImageUpload from "../components/ImageUpload"
+import TripForm from "../components/TripForm"
 
-const EMPTY_STOP = {
-    "city": "",
-    "sublocation": "",
-    "imageUrl": "",
-    "description": ""
-}
-
-const EMPTY_TRIP = {
-  "country": "",
-  "stops": [{...EMPTY_STOP}]
-}
 
 const Create = () => {
     const navigate = useNavigate()
     const {user} = useSelector(selectUser);
-    const [emptyTrip, setEmptyTrip] = useState({
-        ...EMPTY_TRIP,
-        userId: user.uid || ''
-    })
     useEffect(() => {
         if (!user) {
             navigate("/login")
@@ -45,7 +30,7 @@ const Create = () => {
       - Pass down as props the 'submit' function with post or put logic
 
     */
-    return <ImageUpload/>
+    return <TripForm/>
 }
 
 export default Create;

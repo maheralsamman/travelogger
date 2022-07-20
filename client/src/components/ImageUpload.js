@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import style from "./ImageUpload.module.css";
 
-// const url = "https://www.planetware.com/photos-large/ENG/england-stonehenge.jpg";
-const url = '';
-
 const DEFAULT_MESSAGE = 'Tap to upload (max 5mb)'
 
-const ImageUpload = () => {
-    const [fileUrl, setFileUrl] = useState(url || null);
+const ImageUpload = ({fileUrl, setFileUrl}) => {
     const [uploading, setUploading] = useState(false)
     const [msg, setMsg] = useState(DEFAULT_MESSAGE);
     const handleAddFile = async e => {
@@ -43,7 +39,7 @@ const ImageUpload = () => {
         ? { backgroundImage: `url(${fileUrl}`, backgroundSize: "cover" }
         : null;
     return (
-        <form style={backgroundStyle} className={style.form}>
+        <div style={backgroundStyle} className={style.form}>
             <label className={style.label} style={uploading ? { opacity: ".5"} : null}>
                 {uploading ? "Uploading..." : msg}
                 <input
@@ -53,7 +49,7 @@ const ImageUpload = () => {
                     disabled={uploading}
                 />
             </label>
-        </form>
+        </div>
     )
 }
 

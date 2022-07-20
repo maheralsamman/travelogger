@@ -16,17 +16,19 @@
     cursor: pointer;
 }
 
-.header__homeLink {
+.header__logo {
     width: min-content;
     height: 100%;
     display: flex;
     align-items: center;
     position: absolute;
     left: 50%;
+    top: 2px;
     transform: translateX(-50%);
+
 }
 
-.header__logo{
+.header__logoImg{
     height: 40px;
     position: relative;
     margin-right: -2px;
@@ -45,18 +47,12 @@
     position: absolute;
     right: 10px;
     height: 100%;
+}
+
+.header__signIcon{
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.header__signin{
-font-size: 50px;
-position: relative;
-top: 5px;
-}
-.header__signOut{
     font-size: 50px;
-    position: relative;
-top: 5px;
 }

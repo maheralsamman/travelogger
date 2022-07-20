@@ -18,16 +18,16 @@ const Header = ({back, login}) => {
         <div className={style.header__backButton} onClick={() => navigate(-1)}>
           <IoIosArrowBack/>
         </div>
-        <Link to="/" className={style.header__homeLink}>
+        <div className={style.header__logo}>
           <h1 className={style.header__title}>Travel</h1>
-          <img className={style.header__logo} src={img} alt="LOGO"/>
+          <img className={style.header__logoImg} src={img} alt="LOGO"/>
           <h1 className={style.header__title}>gger</h1>
           
-        </Link>
+        </div>
         <div className={style.header__sign}>
           {user
-              ? <div className={style.header__signOut} onClick={() => firebase.client.auth().signOut()}><VscSignOut/></div>
-              : <Link className={style.header__signin} to="/login"><VscSignIn/></Link>}
+              ? <div className={style.header__signIcon} onClick={() => firebase.client.auth().signOut()}><VscSignOut/></div>
+              : <Link className={style.header__signIcon} to="/login"><VscSignIn/></Link>}
         </div>
     </header>
   )

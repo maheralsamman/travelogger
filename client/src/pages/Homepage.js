@@ -18,7 +18,7 @@ const Homepage = () => {
             <Header />
             <Background/>
             <main className={style.main}>
-            <h3 className={style.main__title}>Where would we take you today?</h3>
+            <h3 className={style.main__title}>Where will we take you today?</h3>
             <button className={style.main__createButton} onClick={directToLogin}>Create a trip</button>
             <button className={style.main__browseButton} onClick={directToBrowse}>Browse trips</button>
             </main>
