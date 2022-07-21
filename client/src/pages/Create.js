@@ -6,6 +6,38 @@ import TripForm from "../components/TripForm"
 
 
 const Create = () => {
+    // const addDraft = {
+    //     country:"",
+    //     stops:[{
+    //         city: "",
+    //         sublocation: "",
+    //         imageUrl: "",
+    //         details: "",
+    //       }],
+    // };
+    const addDraft = undefined
+    const editDraft = {
+        country:"Germany",
+        stops:[{
+            city: "Berlin",
+            sublocation: "my sublocation",
+            imageUrl: "my image",
+            details: "my details",
+          },
+          {
+            city: "Hamburg",
+            sublocation: "my Hamburg sublocation",
+            imageUrl: "my Hamburg image",
+            details: "my Hamburg details",
+          },
+          {
+            city: "Frankfurt",
+            sublocation: "my Frankfurt sublocation",
+            imageUrl: "my Frankfurt image",
+            details: "my Frankfurt details",
+          },
+        ]
+    }
     const navigate = useNavigate()
     const {user} = useSelector(selectUser);
     useEffect(() => {
@@ -30,7 +62,7 @@ const Create = () => {
       - Pass down as props the 'submit' function with post or put logic
 
     */
-    return <TripForm/>
+    return <TripForm firstDraft={addDraft}/>
 }
 
 export default Create;

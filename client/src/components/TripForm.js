@@ -5,7 +5,7 @@ import { TiTick } from "react-icons/ti";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import style from "./TripForm.module.css";
 
-const EMPTY_STOP = {
+/* const EMPTY_STOP = {
   city: "",
   sublocation: "",
   imageUrl: "",
@@ -18,7 +18,7 @@ const EMPTY_TRIP = {
   country: "",
   stops: [{ ...EMPTY_STOP }],
 };
-
+ */
 const TripForm = ({ firstDraft, submit }) => {
   const initialState = {
     counter: 0,
@@ -49,13 +49,15 @@ const TripForm = ({ firstDraft, submit }) => {
   }
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  
-  const [stops, setStops] = useState([]);
+
+  const [stops, setStops] = useState(firstDraft?.stops || []);
   const [country, setCountry] = useState(firstDraft?.country || "");
-  const [city, setCity] = useState(firstDraft?.city || "");
-  const [sublocation, setSublocation] = useState(firstDraft?.sublocation || "");
-  const [details, setDetails] = useState(firstDraft?.details || "");
-  const [imageUrl, setImageUrl] = useState("");
+  const [city, setCity] = useState(firstDraft?.stops[0].city || "");
+  const [sublocation, setSublocation] = useState(
+    firstDraft?.stops[0].sublocation || ""
+  );
+  const [details, setDetails] = useState(firstDraft?.stops[0].details || "");
+  const [imageUrl, setImageUrl] = useState(firstDraft?.stops[0].imageUrl || "");
 
   const addStop = () => {
     if (!city || !sublocation || !details || !imageUrl) {
@@ -76,20 +78,42 @@ const TripForm = ({ firstDraft, submit }) => {
     setImageUrl("");
   };
   useEffect(() => {
-    if (stops.length) dispatch({ type: "setCounter", payload: stops.length });
+    if (stops.length && !firstDraft)
+      dispatch({ type: "setCounter", payload: stops.length - 1 });
   }, [stops.length]);
 
+/*   useEffect(() => {
+    //console.log("from useEffect", city,sublocation,details,imageUrl)
+/*     console.log("state.counter: ", state.counter);
+    console.log("stops.length: ", stops.length);
+ 
+    // if(stops.length >= state.counter +1)
+     if (city && sublocation && details && imageUrl && stops.length > state.counter) 
+    {
+      console.log("stops.length: ", stops.length);    
+      console.log(city, sublocation, details, imageUrl);
+      console.log("logged  !firstDraft state.counter", state.counter);
+
+      const copiedStop = [...stops]
+
+      copiedStop[state.counter].city = city;
+      copiedStop[state.counter].sublocation = sublocation;
+      copiedStop[state.counter].details = details;
+      copiedStop[state.counter].imageUrl = imageUrl; 
+      setStops(copiedStop)
+    }
+  }, [city, sublocation, details, imageUrl]);
+ */
   const removeStop = () => {
-      stops.splice(state.counter,1)
-      setStops([...stops])
-      if(!stops.length) 
-      {
-          setCountry("")
-        }
-      setCity("");
-      setSublocation("");
-      setDetails("");
-      setImageUrl("");
+    stops.splice(state.counter, 1);
+    setStops([...stops]);
+    if (!stops.length) {
+      setCountry("");
+    }
+    setCity("");
+    setSublocation("");
+    setDetails("");
+    setImageUrl("");
   };
 
   const stepBackwards = () => {
@@ -101,7 +125,9 @@ const TripForm = ({ firstDraft, submit }) => {
   };
 
   useEffect(() => {
-      console.log("state.counter: ",state.counter)
+    console.log("state.counter: ", state.counter);
+    console.log("stops.length: ", stops.length);
+    //  if(stops.length >)
     const prevStop = stops[state.counter];
     if (prevStop) {
       setCity(prevStop.city);
@@ -113,7 +139,7 @@ const TripForm = ({ firstDraft, submit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({country,stops})
+    console.log({ country, stops });
     // if (!country || !city || !sublocation || !details || !imageUrl) {
     //     return;
     // }
@@ -139,16 +165,16 @@ const TripForm = ({ firstDraft, submit }) => {
       <button type="submit">
         <TiTick />
       </button>
-      {state.counter !== 0  && 
-      <button type="button" className={style.back} onClick={stepBackwards}>
-        <IoIosArrowBack />
-      </button>
-      }
-      {state.counter !== stops.length - 1  && 
-      <button type="button" className={style.back} onClick={stepForwards}>
-        <IoIosArrowForward />
-      </button>
-      }
+      {state.counter !== 0 && (
+        <button type="button" className={style.back} onClick={stepBackwards}>
+          <IoIosArrowBack />
+        </button>
+      )}
+      {state.counter !== stops.length - 1 && (
+        <button type="button" className={style.back} onClick={stepForwards}>
+          <IoIosArrowForward />
+        </button>
+      )}
     </form>
   );
 };
