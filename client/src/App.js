@@ -9,8 +9,8 @@ import Trip from './pages/Trip';
 import Login from "./pages/Login"
 import Create from './pages/Create';
 import AllTrips from './pages/AllTrips';
+import UserTrips from './pages/UserTrips';
 import NavWrapper from './components/NavWrapper';
-// import ImageUpload from "./components/ImageUpload"
 
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
           <Route path="/" element={<Homepage/>}/>
           <Route path="/view" element={<NavWrapper/>}>
             <Route path="all" element={<AllTrips/>}/>
-            {/* <Route path="mytrips" element={<UserTrips/>}/> */}
+            <Route path="mytrips" element={<UserTrips/>}/>
           </Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/create" element={<Create/>}/>

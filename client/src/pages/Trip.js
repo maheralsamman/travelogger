@@ -57,10 +57,12 @@ const Trip = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { onboarded } = useSelector(selectUser);
+
     const [citySlave, setCitySlave] = useState(null);
     const [backgroundSlave, setBackgroundSlave] = useState(null);
     const [foregroundSlave, setForegroundSlave] = useState(null);
     const [control, setControl] = useState(null);
+    
     const [index, setIndex] = useState(0);
 
     const [cities, cityIndexes] = (() => {
@@ -90,7 +92,7 @@ const Trip = () => {
         if (onboarded) {
             return;
         }
-        setTimeout(() => dispatch(onboard()), 3000)
+        setTimeout(() => dispatch(onboard()), 2300)
     }, [])
 
     const reset = () => {

@@ -1,0 +1,33 @@
+.container {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 80px 1fr 80px;
+}
+
+.container__outlet {
+    overflow-y: scroll;
+}
+
+.footer {
+    background-color: #FFF4E4;
+
+}
+
+.nav {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.footer__link {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+}
+
+.footer__link--active {
+    background-color: #fff;
+}
