@@ -24,19 +24,15 @@ const TripForm = ({ firstDraft, submit }) => {
     counter: 0,
   };
   const action = {
+    type: "setCounter",
     type: "decrease",
     type: "increase",
-    type: "setCounter",
   };
 
   function reducer(state, action) {
     let newState;
     switch (action.type) {
       case "setCounter":
-        console.log("action.payload ", action.payload);
-        newState = { counter: action.payload };
-        break;
-      case "setCounterAfterRemove":
         console.log("action.payload ", action.payload);
         newState = { counter: action.payload };
         break;
@@ -53,6 +49,7 @@ const TripForm = ({ firstDraft, submit }) => {
   }
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  
   const [stops, setStops] = useState([]);
   const [country, setCountry] = useState(firstDraft?.country || "");
   const [city, setCity] = useState(firstDraft?.city || "");
@@ -62,7 +59,7 @@ const TripForm = ({ firstDraft, submit }) => {
 
   const addStop = () => {
     if (!city || !sublocation || !details || !imageUrl) {
-      return;
+      return alert("All fields should be filled");
     }
     setStops((prev) => [
       ...prev,
@@ -142,12 +139,16 @@ const TripForm = ({ firstDraft, submit }) => {
       <button type="submit">
         <TiTick />
       </button>
+      {state.counter !== 0  && 
       <button type="button" className={style.back} onClick={stepBackwards}>
         <IoIosArrowBack />
       </button>
+      }
+      {state.counter !== stops.length - 1  && 
       <button type="button" className={style.back} onClick={stepForwards}>
         <IoIosArrowForward />
       </button>
+      }
     </form>
   );
 };
