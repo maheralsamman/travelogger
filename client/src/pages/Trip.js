@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade } from "swiper";
+import {IoIosArrowBack} from 'react-icons/io'
+import { VscDebugRestart } from 'react-icons/vsc';
 import styles from "./Trip.module.css";
 import 'swiper/css';
 import "swiper/css/effect-fade";
@@ -41,6 +43,7 @@ const DUMMY = {
 
 const Trip = () => {
     const navigate = useNavigate();
+
     const [citySlave, setCitySlave] = useState(null);
     const [backgroundSlave, setBackgroundSlave] = useState(null);
     const [foregroundSlave, setForegroundSlave] = useState(null);
@@ -77,6 +80,10 @@ const Trip = () => {
 
     return (
         <>
+            <div className={styles.backButton} onClick={() => navigate(-1)}>
+                <IoIosArrowBack/>
+            </div>
+            <button className={styles.reset} disabled={!index} style={{opacity: index ? "1" : "0"}} onClick={reset}><VscDebugRestart/></button>
             <Swiper
                 modules={[EffectFade]}
                 onInit={setBackgroundSlave}
@@ -92,8 +99,6 @@ const Trip = () => {
             </Swiper>
             <div className={styles.filter}/>
             <div className={styles.container}>
-                <button className={styles.back} onClick={() => navigate(-1)}>Back</button>
-                <p className={styles.country}>{DUMMY.country}</p>
                 <Swiper
                     onInit={setCitySlave}
                     allowTouchMove={false}
@@ -105,6 +110,7 @@ const Trip = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+                <p className={styles.country}>{DUMMY.country}</p>
                 <Swiper
                     onInit={setForegroundSlave}
                     className={styles["foreground-swiper"]}
@@ -112,17 +118,17 @@ const Trip = () => {
                 >
                     {DUMMY.stops.map(stop => (
                         <SwiperSlide key={stop.sublocation}>
-                            <img className={styles["foreground-swiper--image"]} src={stop.imageUrl} alt={stop.sublocation}/>
-                            <p className={styles.sublocation}>{stop.sublocation}</p>
-                            <p className={styles.description}>{stop.description}</p>
+                            <div className={styles["foreground-slide-container"]}>
+                                <div className={styles["foreground-slide__image-container"]}>
+                                    <img className={styles["foreground-swiper--image"]} src={stop.imageUrl} alt={stop.sublocation}/>
+                                </div>
+                                <p className={styles.sublocation}>{stop.sublocation}</p>
+                                <p className={styles.description}>{stop.description}</p>
+                            </div>
                         </SwiperSlide>
                     ))}
                 </Swiper>
                 <Progress stops={DUMMY.stops.map(({city}) => city)} index={index}/>
-                {index === DUMMY.stops.length - 1
-                    ? <button className={styles.reset} onClick={reset}>Go back to start</button>
-                    : null
-                }
             </div>
             <Swiper
                 onInit={setControl}
