@@ -83,9 +83,7 @@ const TripForm = ({ firstDraft, submit }) => {
   }, [stops.length]);
 
   const removeStop = () => {
-      //console.log(state.counter)
       stops.splice(state.counter,1)
-      //console.log(stops)
       setStops([...stops])
       if(!stops.length) 
       {
@@ -95,10 +93,6 @@ const TripForm = ({ firstDraft, submit }) => {
       setSublocation("");
       setDetails("");
       setImageUrl("");
-  if(stops.length){
-      console.log("stops.length: " , stops.length)
-     //   dispatch({ type: "setCounterAfterRemove", payload: stops.length -1 })
-      }
   };
 
   const stepBackwards = () => {
@@ -122,7 +116,7 @@ const TripForm = ({ firstDraft, submit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.log({country,stops})
+    console.log({country,stops})
     // if (!country || !city || !sublocation || !details || !imageUrl) {
     //     return;
     // }
