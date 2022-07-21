@@ -1,14 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+import { onboard, selectUser } from '../redux/userSlice';
+
+// swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade } from "swiper";
-import {IoIosArrowBack} from 'react-icons/io'
-import { VscDebugRestart } from 'react-icons/vsc';
-import styles from "./Trip.module.css";
 import 'swiper/css';
 import "swiper/css/effect-fade";
 
+// icons
+import {IoIosArrowBack} from 'react-icons/io'
+import { VscDebugRestart } from 'react-icons/vsc';
+
+// styles
+import styles from "./Trip.module.css";
+
+// components
 import Progress from '../components/Progress';
+import SwiperOnboard from '../components/SwiperOnboard';
 
 const DUMMY = {
     userId: "s0m3Us3riD",
@@ -43,7 +55,8 @@ const DUMMY = {
 
 const Trip = () => {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const { onboarded } = useSelector(selectUser);
     const [citySlave, setCitySlave] = useState(null);
     const [backgroundSlave, setBackgroundSlave] = useState(null);
     const [foregroundSlave, setForegroundSlave] = useState(null);
@@ -72,6 +85,13 @@ const Trip = () => {
         citySlave.slideTo(cityIndexes[index]);
         [backgroundSlave, foregroundSlave].forEach(slave => slave.slideTo(index));
     }, [index])
+
+    useEffect(() => {
+        if (onboarded) {
+            return;
+        }
+        setTimeout(() => dispatch(onboard()), 3000)
+    }, [])
 
     const reset = () => {
         setIndex(0);
@@ -137,6 +157,7 @@ const Trip = () => {
             >
                 {DUMMY.stops.map((_, i) => <SwiperSlide className={styles["control-swiper--slide"]} key={i}/>)}
             </Swiper>
+            {onboarded ? null : <SwiperOnboard/>}
         </>
     )
 }

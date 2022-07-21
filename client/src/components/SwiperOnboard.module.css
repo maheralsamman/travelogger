@@ -1,0 +1,93 @@
+.container {
+    background-color: #000;
+    opacity: .4;
+    position: absolute;
+    inset: 0;
+    z-index: 900;
+    animation: fade 2.4s;
+    animation-fill-mode: forwards;
+}
+
+.arrowContainer {
+    position: absolute;
+    inset: 0;
+    z-index: 900;
+    overflow: hidden;
+}
+
+.arrow {
+    height: 100px;
+    width: 250px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    animation: zoom-left 2.1s;
+    animation-fill-mode: forwards;
+}
+
+.point {
+    width: 0; 
+    height: 0; 
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent; 
+    border-right: 50px solid #fff;
+    
+}
+
+.line {
+    width: 200px;
+    height: 50px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 10px 10px 0;
+    padding-right: 25px;
+}
+
+.line__text {
+    font-size: 25px;
+}
+
+@keyframes zoom-left {
+    0% {
+        left: 100%;
+    }
+    50% {
+        left: 100%;
+        animation-timing-function: ease-out;
+    }
+    66.6% {
+        left: calc(100% - 275px);
+        animation-timing-function: linear;
+    }
+    83.4% {
+        left: 25px;
+        animation-timing-function: ease-in;
+
+    }
+    100% {
+        left: -100%
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0
+    }
+    40% {
+        opacity: 0
+    }
+    55% {
+        opacity: .4
+    }    
+    85% {
+        opacity: .4
+    }
+    100% {
+        opacity: 0
+    }
+}

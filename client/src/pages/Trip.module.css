@@ -87,7 +87,7 @@
 
 .foreground-slide-container {
     display: grid;
-    grid-template-rows: 1fr 2em 10em;
+    grid-template-rows: 1fr 2.3em 10em;
     height: 100%;
     width: 100%;
     position: relative;
@@ -103,7 +103,7 @@
 }
 
 .foreground-swiper--image {
-    max-height: 270px;
+    max-height: 260px;
     max-width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
