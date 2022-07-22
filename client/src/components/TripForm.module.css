@@ -1,3 +1,10 @@
 button {
     font-size: 22px;
 }
+
+.form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2em;
+}
