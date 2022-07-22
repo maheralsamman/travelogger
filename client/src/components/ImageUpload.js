@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import style from "./ImageUpload.module.css";
 
-const DEFAULT_MESSAGE = 'Tap to upload (max 5mb)'
+const NO_IMAGE = 'Tap to upload (max 5mb)'
+const HAS_IMAGE = "Tap to change (max 5mb)"
 
 const ImageUpload = ({fileUrl, setFileUrl}) => {
     const [uploading, setUploading] = useState(false)
-    const [msg, setMsg] = useState(DEFAULT_MESSAGE);
+    const [msg, setMsg] = useState(fileUrl ? HAS_IMAGE : NO_IMAGE);
     const handleAddFile = async e => {
-        console.log("CHANGED")
         const file = e.target.files[0];
         if (file.size > 1024 * 1024 * 5) {
             setMsg("File too large (max 5mb)");
@@ -20,7 +20,6 @@ const ImageUpload = ({fileUrl, setFileUrl}) => {
         }
         setUploading(true)
         try {
-            console.log("UPLOADING")
             const formData = new FormData();
             formData.append("photo", file);
             const result = await fetch("http://localhost:3001/api/cloudinary", {
@@ -29,7 +28,7 @@ const ImageUpload = ({fileUrl, setFileUrl}) => {
             })
             const { url } = await result.json()
             setUploading(false)
-            setMsg(DEFAULT_MESSAGE)
+            setMsg(HAS_IMAGE)
             setFileUrl(url)
             e.target.value = null;
         } catch(e) {
@@ -43,7 +42,7 @@ const ImageUpload = ({fileUrl, setFileUrl}) => {
         : null;
     return (
         <div style={backgroundStyle} className={style.form}>
-            <label className={style.label} style={uploading ? { opacity: ".5"} : null}>
+            <label className={style.label} style={uploading || fileUrl ? { opacity: ".7"} : null}>
                 {uploading ? "Uploading..." : msg}
                 <input
                     className={style.input}

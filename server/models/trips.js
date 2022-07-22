@@ -11,6 +11,7 @@ const StopSchema = new Schema({
 const TripSchema = new Schema(
   {
     userId: {type: String, required: true},
+    username: {type: String, required: true},
     country: {type: String, required: true},
     stops: [{type: StopSchema, required: true}],
   },

@@ -1,3 +1,144 @@
+import { useNavigate } from "react-router-dom"
+import style from "./TripForm.module.css"
+
+// icons
+import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
+import { TiTick } from 'react-icons/ti'
+import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
+
+// hooks
+import { useForm } from "../hooks";
+
+// redux
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/userSlice"
+
+// components
+import ImageUpload from "./ImageUpload";
+
+const TripForm = ({ firstDraft, submit }) => {
+    const navigate = useNavigate();
+    const { user } = useSelector(selectUser);
+
+    const { trip, currentStop, update, index, validate } = useForm(firstDraft);
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const readyTrip = {
+          ...trip,
+          stops: trip.stops.map(stop => {
+            const clonedStop = {...stop};
+            delete clonedStop.id;
+            return clonedStop
+          })
+        }
+        try {
+          console.log(readyTrip)
+            await submit(readyTrip);
+            navigate(`/view/${user ? "mytrips" : "all"}`)
+        } catch(e) {
+            // keep user on the page to tell them something went wrong
+        }
+    }
+
+    const handleChange = cb => e => cb(e.target.value);
+    const handleUpdateCountry = handleChange(update.country)
+    const handleUpdateStop = key => handleChange(val => update.stop(key, val))
+    const handleUpdateDescription = e => {
+      const value = e.target.value;
+      if (/\n/g.test(value)) {
+        return
+      }
+      update.stop("description", value)
+    }
+    const handleUpdateImage = url => update.stop("imageUrl", url)
+
+    const backgroundStyle = { backgroundImage: `url(${currentStop.imageUrl})` };
+
+    return (
+      <>
+        {currentStop.imageUrl ? <div style={backgroundStyle} className={style.background}/> : null}
+           <button
+              type="button"
+              className={style.back}
+              onClick={index.back}
+              disabled={!validate.canGoBack}
+          >
+              <IoIosArrowBack/>
+          </button>
+          <button
+              type="button"
+              className={style.forwards}
+              onClick={index.forwards}
+              disabled={!validate.canGoForwards}
+          >
+              <IoIosArrowForward/>
+          </button>
+          <div className={style.backButton} onClick={() => navigate(-1)}>
+                <IoIosArrowBack/>
+            </div>
+        <form onSubmit={handleSubmit} className={style.form}>
+            <div className={style.headerContainer}>
+              <input
+                  value={currentStop.city}
+                  onChange={handleUpdateStop("city")}
+                  className={style.city}
+                  placeholder="Add city"
+              />
+              <input
+                  value={trip.country}
+                  onChange={handleUpdateCountry}
+                  disabled={validate.canGoBack}
+                  className={style.country}
+                  placeholder="Add country"
+              />
+            </div>
+            <ImageUpload
+                fileUrl={currentStop.imageUrl}
+                setFileUrl={handleUpdateImage}
+            />
+            <input
+                value={currentStop.sublocation}
+                onChange={handleUpdateStop("sublocation")}
+                className={style.sublocation}
+                placeholder="Add location"
+            />
+            <textarea
+                value={currentStop.description}
+                onChange={handleUpdateDescription}
+                className={style.description}
+                maxLength="200"
+                placeholder="Add description"
+            />
+            <div className={style.buttonContainer}>
+              <button
+                  type="button"
+                  onClick={update.remove}
+                  disabled={!validate.canRemove}
+              >
+                  <AiOutlineMinus />
+              </button>
+              <button
+                  type="button"
+                  onClick={update.add}
+                  disabled={!validate.canAdd}
+              >
+                  <AiOutlinePlus />
+              </button>
+              <button
+                  type="submit"
+                  disabled={!validate.canSubmit}
+              >
+                  <TiTick />
+              </button>
+            </div>
+        </form>
+          </>
+    )
+}
+
+export default TripForm;
+
 // import ImageUpload from "./ImageUpload";
 // import { useState, useEffect, useReducer } from "react";
 // import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
@@ -180,120 +321,3 @@
 // };
 
 // export default TripForm;
-
-
-import { useNavigate } from "react-router-dom"
-import style from "./TripForm.module.css"
-
-// icons
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
-import { TiTick } from 'react-icons/ti'
-import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
-
-// hooks
-import { useForm } from "../hooks";
-
-// redux
-import { useSelector } from "react-redux";
-import { selectUser } from "../redux/userSlice"
-
-// components
-import ImageUpload from "./ImageUpload";
-
-const TripForm = ({ firstDraft, submit }) => {
-    const navigate = useNavigate();
-    const { user } = useSelector(selectUser);
-
-    const { trip, currentStop, update, index, validate } = useForm(firstDraft);
-
-    const handleSubmit = async e => {
-        e.preventDefault();
-        const readyTrip = {
-          ...trip,
-          stops: trip.stops.map(stop => {
-            const clonedStop = {...stop};
-            delete clonedStop.id;
-            return clonedStop
-          })
-        }
-        try {
-          console.log(readyTrip)
-            await submit(readyTrip);
-            navigate(`/view/${user ? "mytrips" : "all"}`)
-        } catch(e) {
-            // keep user on the page to tell them something went wrong
-        }
-    }
-
-    const handleChange = cb => e => cb(e.target.value);
-    const handleUpdateCountry = handleChange(update.country)
-    const handleUpdateStop = key => handleChange(val => update.stop(key, val))
-    const handleUpdateDescription = handleChange(val => update.stop("description", val.replace(/\n/g, "")))
-    const handleUpdateImage = url => update.stop("imageUrl", url)
-
-    return (
-        <form onSubmit={handleSubmit} className={style.form}>
-            <input
-                value={currentStop.city}
-                onChange={handleUpdateStop("city")}
-            />
-            <input
-                value={trip.country}
-                onChange={handleUpdateCountry}
-                disabled={validate.canGoBack}
-            />
-            <ImageUpload
-                fileUrl={currentStop.imageUrl}
-                setFileUrl={handleUpdateImage}
-            />
-            <input
-                value={currentStop.sublocation}
-                onChange={handleUpdateStop("sublocation")}
-            />
-            <textarea
-                value={currentStop.description}
-                onChange={handleUpdateDescription}
-            />
-            <div className={style.buttonContainer}>
-              <button
-                  type="button"
-                  onClick={update.remove}
-                  disabled={!validate.canRemove}
-              >
-                  <AiOutlineMinus />
-              </button>
-              <button
-                  type="button"
-                  onClick={update.add}
-                  disabled={!validate.canAdd}
-              >
-                  <AiOutlinePlus />
-              </button>
-              <button
-                  type="submit"
-                  disabled={!validate.canSubmit}
-              >
-                  <TiTick />
-              </button>
-            </div>
-            <button
-                type="button"
-                className={style.back}
-                onClick={index.back}
-                disabled={!validate.canGoBack}
-            >
-                <IoIosArrowBack/>
-            </button>
-            <button
-                type="button"
-                className={style.back}
-                onClick={index.forwards}
-                disabled={!validate.canGoForwards}
-            >
-                <IoIosArrowForward/>
-            </button>
-        </form>
-    )
-}
-
-export default TripForm;

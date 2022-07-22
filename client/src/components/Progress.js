@@ -17,7 +17,6 @@ const Progress = ({stops, index}) => {
     const getOffset = total => total / (stops.length - 1) * index;
     const pinOffsetPercent = getOffset(100);
     const pinOffsetPixels = getOffset(30);
-    console.log(pinOffsetPixels)
     return (
         <div className={styles.container}>
             <div className={styles.line}/>
