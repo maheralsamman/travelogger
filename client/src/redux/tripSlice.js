@@ -139,4 +139,13 @@ export const tripSlice = createSlice({
 
 //export const { increment, decrement, incrementByAmount } = tripSlice.actions
 
+export const selectTrip = id => state => state.trips.trips.find(trip => trip._id === id)
+
+export const selectTrips = searchTerm => state => state.trips.trips.filter(trip => {
+  const regExp = new RegExp(searchTerm, "gi");
+  return regExp.test(trip.country) || regExp.test(trip.username)
+})
+
+// const thisTrip = useSelector(selectTrip(id))
+
 export default tripSlice.reducer
