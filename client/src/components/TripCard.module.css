@@ -1,25 +1,38 @@
 .card {
-    height: 300px;
     width: 100%;
-    background-color: rgb(60, 164, 255);
-    border: 20px solid white;
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    padding: 1.2em;
 }
 .card__country{
-
+    margin: 0;
+    font-size: 22px;
 }
 
 .card__city{
-
+    font-weight: 300;
 }
 .card__image{
-width: 200px;
-height: 150px;
+    margin-block: 0.5em;
+    border-radius: 12px;
+    align-self: center;
+    width: 85%;
+    height: 200px;
+    object-fit: cover;
+}
+.card__dateAndUser{
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 1.6em;
+}
+.card__arrow {
+    position: relative;
+    top: 3px;
+    z-index: -100;
 }
 .card__date{
-
+    font-weight: 300;
 }
 .card__userName{
 

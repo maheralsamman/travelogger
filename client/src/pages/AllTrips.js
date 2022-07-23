@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TripCard from "../components/TripCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SearchTrips from "../components/SearchTrips";
 import style from './AllTrips.module.css'
-import { selectTrips } from "../redux/tripSlice"
+import { selectTrips, getAlltrips } from "../redux/tripSlice"
+import DotLoader from "react-spinners/DotLoader";
+
+
 
 /* const DUMMY = {
     userId: "s0m3Us3riD",
@@ -38,6 +41,11 @@ import { selectTrips } from "../redux/tripSlice"
 }
  */
 const AllTrips = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+           dispatch(getAlltrips())
+      }, []); 
     const [search, setSearch] = useState("");
 
   const  trips  = useSelector(selectTrips(search));
@@ -47,11 +55,14 @@ const AllTrips = () => {
     <>
     <SearchTrips setSearch={setSearch} />
     <div className={style.tripsContainer}>
-      {!trips ? (
-        <p>Loading...</p>
+    
+   {!trips.length ? (
+    <div className={style.loading}>
+    <DotLoader loading={true} size={150} color="#0091ad"/>
+    </div>
       ) : (
         trips.map((trip) => <TripCard key={trip._id} trip={trip} />)
-      )}
+      )} 
      </div> 
     </>
   );

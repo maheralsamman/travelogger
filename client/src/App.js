@@ -14,7 +14,6 @@ import NavWrapper from './components/NavWrapper';
 
 
 function App() {
- const dispatch = useDispatch();
 
 //  const dummy = {
 //   "userId": "Maheriscool4",
@@ -27,16 +26,6 @@ function App() {
 //   }]
 // }
 //   const trips = useSelector(state => state.trips)
-  useEffect(() => {
-    const updateTrips = () => {
-       dispatch(getAlltrips())
-    //const id = "62d69b0799ebd14af29fdaa0";
-    //dispatch(updateTrip({id , updatedTrip:dummy}))
-     //dispatch(deleteTrip(id))
-    };
-    updateTrips()
-    //console.log(trips)
-  }, []); 
 
   return (
     <div className="App">

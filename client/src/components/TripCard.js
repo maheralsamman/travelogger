@@ -14,12 +14,14 @@ const TripCard = ({ trip }) => {
         <p  className={styles.card__city}>{trip.stops[0].city}</p>
       ) : (
         <p  className={styles.card__city}>
-          {trip.stops[0].city} <BsArrowRight /> {trip.stops.at(-1).city}
+          {trip.stops[0].city} <BsArrowRight className={styles.card__arrow}/> {trip.stops.at(-1).city}
         </p>
       )}
       <img className={styles.card__image} src={trip.stops[0].imageUrl} alt={trip.stops[0].city} />
+      <div className={styles.card__dateAndUser}>
       <p className={styles.card__date} >{new Date(trip.createdAt).toLocaleDateString()}</p>
       <p className={styles.card__userName}>{trip.userName}</p>
+      </div>
     </div>
   );
 };
