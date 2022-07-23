@@ -15,10 +15,11 @@ export const getAlltrips = createAsyncThunk(
 
 
 export const postTrip = createAsyncThunk('postTrip',
-  async (trip) => {
+  async (trip, {getState}) => {
+    const {user} = getState();
         const trips = await fetch(urlTrips, {
           method: 'POST',
-          body: JSON.stringify(trip),
+          body: JSON.stringify({...trip, userName:user.displayName, userId:user.uid}),
           headers:{
             'Content-Type': 'application/json',
           }
@@ -37,11 +38,12 @@ export const postTrip = createAsyncThunk('postTrip',
 );
 
 export const updateTrip = createAsyncThunk('updateTrip',
-  async ({id, updatedTrip}) => {
+  async ({id, updatedTrip}, {getState}) => {
+    const {user} = getState();  
     console.log("here", id, updatedTrip);
          const trip = await fetch(`${urlTrips}/${id}`, {
            method: 'PUT',
-           body: JSON.stringify(updatedTrip),
+           body: JSON.stringify({...updateTrip, userName:user.displayName, userId:user.uid}),
            headers:{
             'Content-Type': 'application/json',
            }
@@ -71,7 +73,7 @@ export const tripSlice = createSlice({
     builder
       .addCase(getAlltrips.fulfilled, (state, action) => {
         console.log("fulfilled")
-        state.trips = action.payload;
+        state.trips = action.payload.trips;
         state.loading = false;
         state.hasError = false;
       })
@@ -141,10 +143,10 @@ export const tripSlice = createSlice({
 
 export const selectTrip = id => state => state.trips.trips.find(trip => trip._id === id)
 
-export const selectTrips = searchTerm => state => state.trips.trips.filter(trip => {
+export const selectTrips = searchTerm => state => searchTerm ?  state.trips.trips.filter(trip => {
   const regExp = new RegExp(searchTerm, "gi");
-  return regExp.test(trip.country) || regExp.test(trip.username)
-})
+  return regExp.test(trip.country) || regExp.test(trip.userName)
+}) : state.trips.trips;
 
 // const thisTrip = useSelector(selectTrip(id))
 

@@ -1,7 +1,26 @@
 .card {
     height: 300px;
     width: 100%;
-    background-color: aliceblue;
+    background-color: rgb(60, 164, 255);
     border: 20px solid white;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+.card__country{
+
+}
+
+.card__city{
+
+}
+.card__image{
+width: 200px;
+height: 150px;
+}
+.card__date{
+
+}
+.card__userName{
+
 }

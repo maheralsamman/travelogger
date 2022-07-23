@@ -1,6 +1,11 @@
+import { useState } from "react";
 import TripCard from "../components/TripCard";
+import { useSelector } from "react-redux";
+import SearchTrips from "../components/SearchTrips";
+import style from './AllTrips.module.css'
+import { selectTrips } from "../redux/tripSlice"
 
-const DUMMY = {
+/* const DUMMY = {
     userId: "s0m3Us3riD",
     country: "England",
     _id: "ojkaefpjawokgj",
@@ -31,18 +36,25 @@ const DUMMY = {
         }
     ]
 }
-
+ */
 const AllTrips = () => {
-    return (
-        <>
-          <TripCard trip={DUMMY}/>
-          <TripCard trip={DUMMY}/>
-          <TripCard trip={DUMMY}/>
-          <TripCard trip={DUMMY}/>
-          <TripCard trip={DUMMY}/>
-          <TripCard trip={DUMMY}/>
-        </>
-    )
-}
+    const [search, setSearch] = useState("");
+
+  const  trips  = useSelector(selectTrips(search));
+  console.log(trips)
+
+  return (
+    <>
+    <SearchTrips setSearch={setSearch} />
+    <div className={style.tripsContainer}>
+      {!trips ? (
+        <p>Loading...</p>
+      ) : (
+        trips.map((trip) => <TripCard key={trip._id} trip={trip} />)
+      )}
+     </div> 
+    </>
+  );
+};
 
 export default AllTrips;

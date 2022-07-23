@@ -1,0 +1,24 @@
+.searchForm{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 1em;
+    position: fixed;
+    background-color: white;
+    padding-block: 1em;
+    top: 4.8em;
+}
+.searchForm__input{
+    width: 65%;
+    border-radius: 15px;
+    border: 2px solid #0091ad;
+    padding: .8em;
+    height: 4em;
+}
+.searchForm__submit{
+    background: none;
+    border: none;
+    font-size: 2.2em;
+    padding-top: 0.1em;
+}
