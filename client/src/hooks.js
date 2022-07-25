@@ -62,7 +62,7 @@ export const useForm = priorTrip => {
     }
 
     const editCountry = country => {
-        setDraftTrip(prev => ({country, stops: prev.stops}))
+        setDraftTrip(prev => ({...prev, country}))
     }
 
     const updateStops = cb => {

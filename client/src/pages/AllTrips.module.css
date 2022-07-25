@@ -9,3 +9,13 @@
     align-items: center;
     justify-content: center;
 }
+
+.failedSearch {
+    position: relative;
+    width: 100%;
+    padding-inline: 1em;
+    text-align: center;
+    top: 50%;
+    font-size: 1.3em;
+    transform: translateY(-50%)
+}

@@ -8,6 +8,7 @@
     background-color: white;
     padding-block: 1em;
     top: 4.8em;
+    z-index: 100;
 }
 .searchForm__input{
     flex-grow:1;

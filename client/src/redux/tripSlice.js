@@ -68,12 +68,15 @@ export const deleteTrip = createAsyncThunk('deleteTrip',
   },
 );
 
-const initialState = { loading: false, hasError: false, error: '', trips: [] };
+const initialState = { loading: false, hasError: false, error: '', trips: [], successMsg: '' };
 
 export const tripSlice = createSlice({
   name: 'trips',
   initialState,
   reducers: {
+    resetSuccessMsg: (state) => {
+      state.successMsg = ''
+    }
   },
   extraReducers: builder => {
     builder
@@ -96,6 +99,7 @@ export const tripSlice = createSlice({
       .addCase(postTrip.fulfilled, (state, action) => {
         console.log("fulfilled", action.payload)
         state.trips.unshift(action.payload)
+        state.successMsg = 'Trip added ✔'
         state.loading = false;
         state.hasError = false;
       })
@@ -113,6 +117,8 @@ export const tripSlice = createSlice({
         console.log("fulfilled", action.payload)
         state.trips = state.trips.filter(trip => trip._id !== action.payload._id)
         state.trips.unshift(action.payload)
+        state.successMsg = 'Trip updated ✔'
+
         state.loading = false;
         state.hasError = false;
       })
@@ -129,6 +135,8 @@ export const tripSlice = createSlice({
       .addCase(deleteTrip.fulfilled, (state, action) => {
         console.log("fulfilled", action.payload)
         state.trips = state.trips.filter(trip => trip._id !== action.payload)
+        state.successMsg = 'Trip deleted ✔'
+
         state.loading = false;
         state.hasError = false;
       })
@@ -145,7 +153,7 @@ export const tripSlice = createSlice({
   }, 
 })
 
-//export const { increment, decrement, incrementByAmount } = tripSlice.actions
+export const { resetSuccessMsg } = tripSlice.actions
 
 export const selectTrip = id => state => state.trips.trips.find(trip => trip._id === id)
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import styles from "./TripCard.module.css";
 import { useNavigate } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
@@ -8,12 +9,12 @@ import { deleteTrip } from "../redux/tripSlice";
 import { useDispatch } from "react-redux";
 import ConfirmModal from "./ConfirmModal";
 
-const TripCard = ({ trip, userTrip }) => {
+const TripCard = ({ trip }) => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  
   const handleClick = () => {
-    console.log("CLICKED")
     navigate(`/trip/${trip._id}`);
   };
 
@@ -22,10 +23,6 @@ const TripCard = ({ trip, userTrip }) => {
     navigate(`/edit/${trip._id}`)
   }
 
-  // const removeTrip = (e) => {
-  //   e.stopPropagation()
-  //   dispatch(deleteTrip(trip._id))
-  // }
   const removeTrip = (e) => {
     e.stopPropagation()
     setShowModal(true)
@@ -38,6 +35,9 @@ const TripCard = ({ trip, userTrip }) => {
     }
     dispatch(deleteTrip(trip._id))
   }
+
+  const { user } = useSelector(state => state.user)
+  const userTrip = trip.userId === user.uid;
 
   return (
     <>

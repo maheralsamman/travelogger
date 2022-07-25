@@ -1,3 +1,20 @@
 .tripContainer {
     padding-inline: 20px;
 }
+
+.failedUserTrips {
+    position: relative;
+    width: 100%;
+    padding-inline: 1em;
+    text-align: center;
+    top: 50%;
+    font-size: 1.3em;
+    transform: translateY(-50%)
+}
+
+.link, .link:visited {
+    color: #0091AD;
+    border-bottom: 1px solid #0091AD;
+    padding-inline: .2em;
+    padding-bottom: -.2em;
+}

@@ -13,6 +13,10 @@ import {VscSignIn, VscSignOut} from 'react-icons/vsc'
 const Header = ({back, login}) => {
   const { user } = useSelector(selectUser);
   const navigate = useNavigate();
+  const handleSignOut = async () => {
+    await firebase.client.auth().signOut();
+    navigate("/login")
+  }
   return (
     <header className={style.header}>
         {/* <div className={style.header__backButton} onClick={() => navigate(-1)}>
@@ -26,7 +30,7 @@ const Header = ({back, login}) => {
         </div>
         <div className={style.header__sign}>
           {user
-              ? <div className={style.header__signIcon} onClick={() => firebase.client.auth().signOut()}><VscSignOut/></div>
+              ? <div className={style.header__signIcon} onClick={handleSignOut}><VscSignOut/></div>
               : <Link className={style.header__signIcon} to="/login"><VscSignIn/></Link>}
         </div>
     </header>

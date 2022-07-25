@@ -1,6 +1,8 @@
 import { Outlet, NavLink } from "react-router-dom"
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../redux/userSlice";
+import { resetSuccessMsg } from "../redux/tripSlice";
 import styles from "./NavWrapper.module.css"
 import Header from "./Header";
 
@@ -8,14 +10,25 @@ import Header from "./Header";
 import { BiBookOpen } from "react-icons/bi"
 import { AiOutlinePlus, AiOutlineUser } from "react-icons/ai"
 
+import Confirmation from "./Confirmation";
+
 
 const NavWrapper = () => {
     const { user } = useSelector(selectUser);
+    const { successMsg } = useSelector(state => state.trips)
+    const dispatch = useDispatch()
     const footerClass = ({isActive}) => `${styles.footer__link} ${isActive ? styles["footer__link--active"] : ""}`
+    useEffect(() => {
+        if (!successMsg) {
+            return;
+        }
+        setTimeout(() => dispatch(resetSuccessMsg()), 2000)
+    }, [successMsg])
     return (
         <div className={styles.container}>
             <Header/>
             <div className={styles.container__outlet}>
+                {successMsg ? <Confirmation>{successMsg}</Confirmation> : null}
                 <Outlet/>
             </div>
             <footer className={styles.footer}>

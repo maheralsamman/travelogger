@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const StopSchema = new Schema({
-    city: {type: String, required: true},
-    sublocation: {type: String, required: true},
+    city: {type: String, required: true, maxLength: 12},
+    sublocation: {type: String, required: true, maxLength: 28},
     imageUrl: {type: String, required: true},
     description: {type: String, required: true, maxLength: 200},
 })
@@ -12,7 +12,7 @@ const TripSchema = new Schema(
   {
     userId: {type: String, required: true},
     userName: {type: String, required: true},
-    country: {type: String, required: true},
+    country: {type: String, required: true, maxLength: 20},
     stops: [{type: StopSchema, required: true}],
   },
   { timestamps: true }

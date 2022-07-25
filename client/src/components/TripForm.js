@@ -4,7 +4,8 @@ import style from "./TripForm.module.css"
 // icons
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
-import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
+import {IoIosArrowBack} from 'react-icons/io'
+import {BiRightArrow, BiLeftArrow} from 'react-icons/bi'
 
 // hooks
 import { useForm } from "../hooks";
@@ -22,7 +23,7 @@ const TripForm = ({ firstDraft, submit }) => {
 
     const { trip, currentStop, update, index, validate } = useForm(firstDraft);
 
-    const handleSubmit = async e => {
+    const handleSubmit = e => {
         e.preventDefault();
         const readyTrip = {
           ...trip,
@@ -34,8 +35,7 @@ const TripForm = ({ firstDraft, submit }) => {
         }
         try {
           console.log(readyTrip)
-            await submit(readyTrip);
-            navigate(`/view/${user ? "mytrips" : "all"}`)
+            submit(readyTrip);
         } catch(e) {
             // keep user on the page to tell them something went wrong
         }
@@ -60,19 +60,19 @@ const TripForm = ({ firstDraft, submit }) => {
         {currentStop.imageUrl ? <div style={backgroundStyle} className={style.background}/> : null}
            <button
               type="button"
-              className={style.back}
+              className={`${style.arrow} ${style['arrow--left']}`}
               onClick={index.back}
               disabled={!validate.canGoBack}
           >
-              <IoIosArrowBack/>
+              <BiLeftArrow/>
           </button>
           <button
               type="button"
-              className={style.forwards}
+              className={`${style.arrow} ${style['arrow--right']}`}
               onClick={index.forwards}
               disabled={!validate.canGoForwards}
           >
-              <IoIosArrowForward/>
+              <BiRightArrow/>
           </button>
           <div className={style.backButton} onClick={() => navigate(-1)}>
                 <IoIosArrowBack/>
@@ -84,6 +84,8 @@ const TripForm = ({ firstDraft, submit }) => {
                   onChange={handleUpdateStop("city")}
                   className={style.city}
                   placeholder="Add city"
+                  maxLength={12}
+
               />
               <input
                   value={trip.country}
@@ -91,6 +93,7 @@ const TripForm = ({ firstDraft, submit }) => {
                   disabled={validate.canGoBack}
                   className={style.country}
                   placeholder="Add country"
+                  maxLength={20}
               />
             </div>
             <ImageUpload
@@ -102,12 +105,13 @@ const TripForm = ({ firstDraft, submit }) => {
                 onChange={handleUpdateStop("sublocation")}
                 className={style.sublocation}
                 placeholder="Add location"
+                maxLength={28}
             />
             <textarea
                 value={currentStop.description}
                 onChange={handleUpdateDescription}
                 className={style.description}
-                maxLength="200"
+                maxLength={200}
                 placeholder="Add description"
             />
             <div className={style.buttonContainer}>
@@ -117,6 +121,7 @@ const TripForm = ({ firstDraft, submit }) => {
                   disabled={!validate.canRemove}
               >
                   <AiOutlineMinus />
+                  <span className={style.buttonText}>Remove stop</span>
               </button>
               <button
                   type="button"
@@ -124,12 +129,16 @@ const TripForm = ({ firstDraft, submit }) => {
                   disabled={!validate.canAdd}
               >
                   <AiOutlinePlus />
+                  <span className={style.buttonText}>Add stop</span>
+
               </button>
               <button
                   type="submit"
                   disabled={!validate.canSubmit}
+                  className={style.submit}
               >
                   <TiTick />
+                  <span className={style.buttonText}>Save trip</span>
               </button>
             </div>
         </form>

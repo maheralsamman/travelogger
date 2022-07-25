@@ -49,20 +49,23 @@ const AllTrips = () => {
     const [search, setSearch] = useState("");
 
   const  trips  = useSelector(selectTrips(search));
+  const loading = useSelector(state => state.trips.loading)
 
   return (
     <>
     <SearchTrips setSearch={setSearch} />
-    <div className={style.tripsContainer}>
     
-   {!trips.length ? (
+   {loading ? (
     <div className={style.loading}>
     <DotLoader loading={true} size={150} color="#0091ad"/>
     </div>
+      ) : trips.length ? (
+        <div className={style.tripsContainer}>
+          {trips.map((trip) => <TripCard key={trip._id} trip={trip} />)}
+        </div>
       ) : (
-        trips.map((trip) => <TripCard key={trip._id} trip={trip} />)
+        <p className={style.failedSearch}>Sorry, no results matching your search!</p>
       )} 
-     </div> 
     </>
   );
 };

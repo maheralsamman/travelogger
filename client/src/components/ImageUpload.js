@@ -38,7 +38,7 @@ const ImageUpload = ({fileUrl, setFileUrl}) => {
     }
 
     const backgroundStyle = fileUrl
-        ? { backgroundImage: `url(${fileUrl}`, backgroundSize: "cover" }
+        ? { backgroundImage: `url(${fileUrl}`, backgroundSize: "cover", borderRadius: "12px" }
         : null;
     return (
         <div style={backgroundStyle} className={style.form}>
