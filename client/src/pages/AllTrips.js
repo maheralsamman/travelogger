@@ -49,7 +49,6 @@ const AllTrips = () => {
     const [search, setSearch] = useState("");
 
   const  trips  = useSelector(selectTrips(search));
-  console.log(trips)
 
   return (
     <>

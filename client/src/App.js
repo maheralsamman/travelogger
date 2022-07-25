@@ -11,7 +11,7 @@ import Create from './pages/Create';
 import AllTrips from './pages/AllTrips';
 import UserTrips from './pages/UserTrips';
 import NavWrapper from './components/NavWrapper';
-
+import Edit from './pages/Edit'
 
 function App() {
 
@@ -38,7 +38,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/create" element={<Create/>}/>
-          {/* <Route path="/edit/:tripId" element={<Edit/>}/> */}
+          <Route path="/edit/:tripId" element={<Edit/>}/>
           <Route path="/trip/:tripId" element={<Trip/>}/>
         </Routes>
       </Router>

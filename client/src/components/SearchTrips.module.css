@@ -10,15 +10,32 @@
     top: 4.8em;
 }
 .searchForm__input{
-    width: 65%;
-    border-radius: 15px;
-    border: 2px solid #0091ad;
-    padding: .8em;
-    height: 4em;
+    flex-grow:1;
+    border:none;
+    font-size: 1.2em;
 }
+
+.searchForm__input:focus {
+    outline: none;
+}
+
 .searchForm__submit{
     background: none;
     border: none;
     font-size: 2.2em;
-    padding-top: 0.1em;
+    padding-top: 0.2em;
+}
+
+.searchForm__x {
+    font-size: 2em;
+    margin-top: 5px;
+}
+
+.searchForm__inputContainer {
+    display: flex;
+    border: 2px solid #0091ad;
+    border-radius: 15px;
+    width: 65%;
+    height: 3.5em;
+    padding:4px
 }

@@ -1,17 +1,29 @@
 import React, { useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
+import { AiOutlineClose } from 'react-icons/ai'
 import style from './SearchTrips.module.css'
 
 const SearchTrips = ({ setSearch }) => {
-    const [searchTerm, setSearchTerm] = useState("")
-    const handleSubmit = (e)=> {
-        e.preventDefault();
-        setSearch(searchTerm)
-    }
+  const [searchTerm, setSearchTerm] = useState("")
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSearch(searchTerm)
+  }
+  const emptyInputField = () => {
+    setSearchTerm('')
+    setSearch('')
+  }
   return (
     <form onSubmit={handleSubmit} className={style.searchForm}>
-        <input onChange={e => setSearchTerm(e.target.value)} className={style.searchForm__input} type="text" placeholder='Search by country or logger' name="search" id="" />
-        <button className={style.searchForm__submit} type='submit'><BsSearch/></button>
+      <div className={style.searchForm__inputContainer}>
+        {
+          searchTerm
+            ? <AiOutlineClose onClick={emptyInputField} className={style.searchForm__x} />
+            : ''
+        }
+        <input onChange={e => setSearchTerm(e.target.value)} value={searchTerm} className={style.searchForm__input} type="text" placeholder='Search by country or logger' name="search" id="" />
+      </div>
+      <button className={style.searchForm__submit} type='submit'><BsSearch /></button>
     </form>
   )
 }
