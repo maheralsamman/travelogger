@@ -39,14 +39,25 @@ export const useForm = priorTrip => {
         }
     }
 
+    const draftTripWithoutStopIds = {
+        ...draftTrip,
+        stops: draftTrip.stops.map(stop =>
+            Object.fromEntries(
+                Object.keys(stop)
+                .filter(key => key !== 'id')
+                .map(key => [key, stop[key]])
+            )
+        )
+    }
 
     const checkIfFull = stop => Object.values(stop).every(str => str.trim())
     const tripFull = Boolean(draftTrip.country.trim() && draftTrip.stops.every(checkIfFull));
+    const isEdited = JSON.stringify(priorTrip) !== JSON.stringify(draftTripWithoutStopIds)
 
     const validate = {
         canAdd: tripFull && currentStopIndex === draftTrip.stops.length - 1,
         canRemove: draftTrip.stops.length > 1,
-        canSubmit: tripFull,
+        canSubmit: tripFull && isEdited,
         canGoBack: currentStopIndex > 0,
         canGoForwards: currentStopIndex < draftTrip.stops.length - 1
     }
