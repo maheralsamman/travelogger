@@ -14,17 +14,19 @@ const Progress = ({stops, index}) => {
         }
         return sizes;
     })();
+    const hasMultipleStops = stops.length > 1
     const getOffset = total => total / (stops.length - 1) * index;
-    const pinOffsetPercent = getOffset(100);
-    const pinOffsetPixels = getOffset(30);
+    const pinOffsetPercent = hasMultipleStops ? getOffset(100) : 50;
+    const pinOffsetPixels = hasMultipleStops ? getOffset(30) : 15;
+    const dotContainerStyle = hasMultipleStops ? null : { justifyContent: "center"}
     return (
         <div className={styles.container}>
-            <div className={styles.line}/>
+            {hasMultipleStops ? <div className={styles.line}/> : null}
             <div className={styles["pin-container"]}>
                 <img className={styles.pin} src={pin} alt="pin icon"
                 style={{left: `calc(${pinOffsetPercent}% - ${pinOffsetPixels}px)`}}/>
             </div>
-            <div className={styles["dot-container"]}>
+            <div className={styles["dot-container"]} style={dotContainerStyle}>
                 {dotSizes.map((size, i) => {
                     const dotStyle = size === "SMALL" ? {
                         transform: "scale(0.7)"

@@ -65,6 +65,8 @@ const Trip = () => {
         navigate(-1)
     }
 
+    const [onboarding, setOnboarding] = useState(false)
+
     const [citySlave, setCitySlave] = useState(null);
     const [backgroundSlave, setBackgroundSlave] = useState(null);
     const [foregroundSlave, setForegroundSlave] = useState(null);
@@ -94,12 +96,16 @@ const Trip = () => {
         citySlave.slideTo(cityIndexes[index]);
         [backgroundSlave, foregroundSlave].forEach(slave => slave.slideTo(index));
     }, [index])
-
+    
     useEffect(() => {
-        if (onboarded) {
+        if (onboarded || thisTrip.stops.length === 1) {
             return;
         }
-        setTimeout(() => dispatch(onboard()), 2300)
+        setOnboarding(true)
+        setTimeout(() => {
+            setOnboarding(false)
+            dispatch(onboard())
+        }, 2300)
     }, [])
 
     const reset = () => {
@@ -166,7 +172,7 @@ const Trip = () => {
             >
                 {thisTrip.stops.map((_, i) => <SwiperSlide className={styles["control-swiper--slide"]} key={i}/>)}
             </Swiper>
-            {onboarded ? null : <SwiperOnboard/>}
+            {onboarding ? <SwiperOnboard/> : null}
         </>
     )
 }
