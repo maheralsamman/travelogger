@@ -43,9 +43,8 @@ export const useForm = priorTrip => {
         ...draftTrip,
         stops: draftTrip.stops.map(stop =>
             Object.fromEntries(
-                Object.keys(stop)
-                .filter(key => key !== 'id')
-                .map(key => [key, stop[key]])
+                Object.entries(stop)
+                .filter(([key]) => key !== 'id')
             )
         )
     }
