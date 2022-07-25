@@ -1,21 +1,34 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useNavigate, useParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import { selectUser } from "../redux/userSlice"
 import TripForm from "../components/TripForm"
+import { updateTrip, selectTrip } from "../redux/tripSlice"
+
 
 const Edit = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const {user} = useSelector(selectUser);
+    const {tripId} = useParams()
+    const thisTrip = useSelector(selectTrip(tripId))
+    console.log(thisTrip)
+
     useEffect(() => {
       if (!user) {
         navigate("/login")
       }
     }, [user])
-    const submit = trip => {
-      // POST
+    if (!thisTrip || thisTrip.userId !== user.uid) {
+      navigate("/view/all")
     }
-    return <TripForm submit={submit}/>
+
+    const submit = async trip => {
+      // PUT
+      await dispatch(updateTrip(trip))
+      navigate('/view/mytrips')
+    }
+    return <TripForm submit={submit} firstDraft={thisTrip}/>
 }
 
 export default Edit;

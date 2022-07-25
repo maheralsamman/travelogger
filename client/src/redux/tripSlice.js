@@ -38,18 +38,16 @@ export const postTrip = createAsyncThunk('postTrip',
 );
 
 export const updateTrip = createAsyncThunk('updateTrip',
-  async ({id, updatedTrip}, {getState}) => {
-    const {user} = getState();  
-    console.log("here", id, updatedTrip);
-         const trip = await fetch(`${urlTrips}/${id}`, {
+  async (formTrip) => {  
+         const response = await fetch(`${urlTrips}/${formTrip._id}`, {
            method: 'PUT',
-           body: JSON.stringify({...updateTrip, userName:user.displayName, userId:user.uid}),
+           body: JSON.stringify(formTrip),
            headers:{
             'Content-Type': 'application/json',
            }
          });
-         const data = await trip.json();
-           return {id, data};
+         const { updatedTrip } = await response.json();
+          return updatedTrip;
   },
 );
 
@@ -105,8 +103,8 @@ export const tripSlice = createSlice({
       })
       .addCase(updateTrip.fulfilled, (state, action) => {
         console.log("fulfilled", action.payload)
-        state.trips.filter(trip => trip._id !== action.payload.id)
-        state.trips.push(action.payload.data.updatedTrip)
+        state.trips = state.trips.filter(trip => trip._id !== action.payload._id)
+        state.trips.push(action.payload)
         state.loading = false;
         state.hasError = false;
       })
