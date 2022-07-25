@@ -1,0 +1,47 @@
+.background {
+    position: absolute;
+    inset: 0;
+    background-color: #000;
+    opacity: .4;
+    z-index: 200;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(100% - 80px);
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 300;
+    padding: 20px;
+    font-size: 1.3em;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.buttonContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.button {
+    padding: .3em .6em .2em;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.button--cancel {
+    border: none;
+}
+
+.button--confirm {
+    border: 1px solid #FF57BB;
+    background-color: #FF57BB;
+    color: white;
+}

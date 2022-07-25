@@ -11,6 +11,14 @@ export const getAlltrips = createAsyncThunk(
           return trips;
         }
   },
+  {
+    condition: (_ , { getState }) => {
+      const { trips } = getState()
+      if (trips.loading || trips.trips.length) {
+        return false
+      }
+    }
+  }
 );
 
 
@@ -53,10 +61,10 @@ export const updateTrip = createAsyncThunk('updateTrip',
 
 export const deleteTrip = createAsyncThunk('deleteTrip',
   async (id) => {
-    //console.log("here", id, updatedTrip);
          await fetch(`${urlTrips}/${id}`, {
           method: 'DELETE'
          });
+         return id;
   },
 );
 
@@ -120,7 +128,7 @@ export const tripSlice = createSlice({
       })
       .addCase(deleteTrip.fulfilled, (state, action) => {
         console.log("fulfilled", action.payload)
-        state.trips.filter(trip => trip._id !== action.payload.id)
+        state.trips = state.trips.filter(trip => trip._id !== action.payload)
         state.loading = false;
         state.hasError = false;
       })
