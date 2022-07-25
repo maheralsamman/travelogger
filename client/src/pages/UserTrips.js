@@ -19,7 +19,7 @@ const UserTrips = () => {
         navigate("/login")
     }
 
-    const id = user.uid;
+    const id = user?.uid;
     const userTrips = trips.filter(trip => trip.userId === id)
 
     return userTrips.length ? (

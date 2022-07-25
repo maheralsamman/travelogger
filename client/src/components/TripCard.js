@@ -37,7 +37,7 @@ const TripCard = ({ trip }) => {
   }
 
   const { user } = useSelector(state => state.user)
-  const userTrip = trip.userId === user.uid;
+  const userTrip = trip.userId === user?.uid;
 
   return (
     <>

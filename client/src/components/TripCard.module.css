@@ -35,9 +35,6 @@
 .card__date{
     font-weight: 300;
 }
-.card__userName{
-
-}
 .card__editIcon {
     position: absolute;
     right: .5em;
