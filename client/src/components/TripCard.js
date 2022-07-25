@@ -16,10 +16,8 @@ const TripCard = ({ trip, userTrip }) => {
 
   return (
       <div className={styles.card} onClick={handleClick}>
-        <div className={styles.card__editAndCountry}>
         <h3 className={styles.card__country}>{trip.country}</h3>
         {userTrip ? <AiOutlineEdit className={styles.card__editIcon} onClick={navigateToEdit}/> : ''}
-        </div>
         {trip.stops.length === 1 ? (
           <p className={styles.card__city}>{trip.stops[0].city}</p>
         ) : (

@@ -37,11 +37,9 @@
 .card__userName{
 
 }
-.card__editAndCountry {
-    display: flex;
-    justify-content: space-between;
-}
-
 .card__editIcon {
-    font-size: 1.8em
+    position: absolute;
+    top: 3.1em;
+    right: 1.8em;
+    font-size: 2em
 }

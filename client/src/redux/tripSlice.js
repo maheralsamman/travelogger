@@ -104,7 +104,7 @@ export const tripSlice = createSlice({
       .addCase(updateTrip.fulfilled, (state, action) => {
         console.log("fulfilled", action.payload)
         state.trips = state.trips.filter(trip => trip._id !== action.payload._id)
-        state.trips.push(action.payload)
+        state.trips.unshift(action.payload)
         state.loading = false;
         state.hasError = false;
       })

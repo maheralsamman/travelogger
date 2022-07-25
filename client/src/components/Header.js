@@ -15,9 +15,9 @@ const Header = ({back, login}) => {
   const navigate = useNavigate();
   return (
     <header className={style.header}>
-        <div className={style.header__backButton} onClick={() => navigate(-1)}>
+        {/* <div className={style.header__backButton} onClick={() => navigate(-1)}>
           <IoIosArrowBack/>
-        </div>
+        </div> */}
         <div className={style.header__logo}>
           <h1 className={style.header__title}>Travel</h1>
           <img className={style.header__logoImg} src={img} alt="LOGO"/>

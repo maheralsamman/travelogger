@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAlltrips } from "../redux/tripSlice"
 import { useEffect } from "react";
 import TripCard from "../components/TripCard";
+import style from './UserTrip.module.css'
 
 const UserTrips = () => {
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const UserTrips = () => {
     console.log(userTrips)
 
     return (
-        <div>{userTrips.map(trip => <TripCard key={trip._id} trip={trip} userTrip={true} />)}</div>
+        <div className={style.tripContainer}>{userTrips.map(trip => <TripCard key={trip._id} trip={trip} userTrip={true} />)}</div>
     )
 }
 
