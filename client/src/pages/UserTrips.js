@@ -13,7 +13,7 @@ const UserTrips = () => {
     const { trips } = useSelector(state => state.trips)
     const { user } = useSelector(state => state.user)
     const id = user.uid;
-    const userTrips = trips.filter(trip => trip.userId === 'Maheriscool4') //hardcoded id of course
+    const userTrips = trips.filter(trip => trip.userId === id) 
     console.log(userTrips)
 
     return (

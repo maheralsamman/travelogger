@@ -16,12 +16,12 @@ const SearchTrips = ({ setSearch }) => {
   return (
     <form onSubmit={handleSubmit} className={style.searchForm}>
       <div className={style.searchForm__inputContainer}>
+        <input onChange={e => setSearchTerm(e.target.value)} value={searchTerm} className={style.searchForm__input} type="text" placeholder='Search by country or logger' name="search" id="" />
         {
           searchTerm
             ? <AiOutlineClose onClick={emptyInputField} className={style.searchForm__x} />
             : ''
         }
-        <input onChange={e => setSearchTerm(e.target.value)} value={searchTerm} className={style.searchForm__input} type="text" placeholder='Search by country or logger' name="search" id="" />
       </div>
       <button className={style.searchForm__submit} type='submit'><BsSearch /></button>
     </form>

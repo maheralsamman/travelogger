@@ -21,7 +21,7 @@ const query = cb => async (firstArg, params) => {
     }
 }
 
-const getAll = query(() => Trip.find({}).exec());
+const getAll = query(() => Trip.find({}).sort([['updatedAt', -1]]).exec());
 
 const postTrip = query((body) => new Trip(body).save())
 
@@ -30,6 +30,5 @@ Trip.findOneAndUpdate({ _id:id }, body, { new: true }).exec()
 )
 
 const deleteTrip = query((id)=> Trip.deleteOne({_id: id}).exec())
-//{_id: ObjectId('62d5bd5a1817ad0a722e6720')}
 
 module.exports = { getAll, postTrip, updateTrip, deleteTrip }

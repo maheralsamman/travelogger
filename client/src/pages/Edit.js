@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { selectUser } from "../redux/userSlice"
 import TripForm from "../components/TripForm"
 
-const Create = () => {
+const Edit = () => {
     const navigate = useNavigate()
     const {user} = useSelector(selectUser);
     useEffect(() => {
@@ -18,4 +18,4 @@ const Create = () => {
     return <TripForm submit={submit}/>
 }
 
-export default Create;
+export default Edit;
