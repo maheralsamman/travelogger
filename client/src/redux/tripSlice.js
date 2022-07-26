@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-const urlTrips = "http://localhost:3001/api/trips"
+const urlTrips = "/api/trips"
 
 export const getAlltrips = createAsyncThunk(
   'getAlltrips',

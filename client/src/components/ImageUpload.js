@@ -22,7 +22,7 @@ const ImageUpload = ({fileUrl, setFileUrl}) => {
         try {
             const formData = new FormData();
             formData.append("photo", file);
-            const result = await fetch("http://localhost:3001/api/cloudinary", {
+            const result = await fetch("/api/cloudinary", {
                 method: "POST",
                 body: formData,
             })

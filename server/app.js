@@ -16,8 +16,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.use('/api/cloudinary', cloudinaryRouter);
 app.use('/api/trips', tripRouter)
 
