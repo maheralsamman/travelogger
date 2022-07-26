@@ -34,7 +34,6 @@ const TripForm = ({ firstDraft, submit }) => {
           })
         }
         try {
-          console.log(readyTrip)
             submit(readyTrip);
         } catch(e) {
             // keep user on the page to tell them something went wrong

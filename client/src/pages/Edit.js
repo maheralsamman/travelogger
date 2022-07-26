@@ -12,7 +12,6 @@ const Edit = () => {
     const {user} = useSelector(selectUser);
     const {tripId} = useParams()
     const thisTrip = useSelector(selectTrip(tripId))
-    console.log(thisTrip)
 
     useEffect(() => {
       if (!user) {
@@ -26,7 +25,6 @@ const Edit = () => {
     const submit = async trip => {
       // PUT
       await dispatch(updateTrip(trip))
-      console.log("SUCCESS")
       navigate('/view/mytrips')
     }
     return <TripForm submit={submit} firstDraft={thisTrip}/>

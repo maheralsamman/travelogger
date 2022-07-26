@@ -33,7 +33,6 @@ const ImageUpload = ({fileUrl, setFileUrl}) => {
             e.target.value = null;
         } catch(e) {
             setUploading(false)
-            console.log(e.message)
         }
     }
 

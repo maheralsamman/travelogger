@@ -17,7 +17,6 @@ const query = cb => async (firstArg, params) => {
         return result;
     } catch(e) {
         await mongoose.connection.close();
-        console.log(e.message);
     }
 }
 

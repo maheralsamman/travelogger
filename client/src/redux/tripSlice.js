@@ -81,40 +81,33 @@ export const tripSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getAlltrips.fulfilled, (state, action) => {
-        console.log("fulfilled")
         state.trips = action.payload.trips;
         state.loading = false;
         state.hasError = false;
       })
       .addCase(getAlltrips.rejected, (state, action) => {
-        console.log("rejected")
         state.loading = false;
         state.hasError = true;
         state.error = action.error.message;
       })
       .addCase(getAlltrips.pending, state => {
-        console.log("pending")
         state.loading = true;
       })
       .addCase(postTrip.fulfilled, (state, action) => {
-        console.log("fulfilled", action.payload)
         state.trips.unshift(action.payload)
         state.successMsg = 'Trip added ✔'
         state.loading = false;
         state.hasError = false;
       })
       .addCase(postTrip.rejected, (state, action) => {
-        console.log("rejected" , action.payload)
         state.loading = false;
         state.hasError = true;
         state.error = action.error.message;
       })
       .addCase(postTrip.pending, state => {
-        console.log("pending")
         state.loading = true;
       })
       .addCase(updateTrip.fulfilled, (state, action) => {
-        console.log("fulfilled", action.payload)
         state.trips = state.trips.filter(trip => trip._id !== action.payload._id)
         state.trips.unshift(action.payload)
         state.successMsg = 'Trip updated ✔'
@@ -123,17 +116,14 @@ export const tripSlice = createSlice({
         state.hasError = false;
       })
       .addCase(updateTrip.rejected, (state, action) => {
-        console.log("rejected" , action.payload)
         state.loading = false;
         state.hasError = true;
         state.error = action.error.message;
       })
       .addCase(updateTrip.pending, state => {
-        console.log("pending")
         state.loading = true;
       })
       .addCase(deleteTrip.fulfilled, (state, action) => {
-        console.log("fulfilled", action.payload)
         state.trips = state.trips.filter(trip => trip._id !== action.payload)
         state.successMsg = 'Trip deleted ✔'
 
@@ -141,13 +131,11 @@ export const tripSlice = createSlice({
         state.hasError = false;
       })
       .addCase(deleteTrip.rejected, (state, action) => {
-        console.log("rejected" , action.payload)
         state.loading = false;
         state.hasError = true;
         state.error = action.error.message;
       })
       .addCase(deleteTrip.pending, state => {
-        console.log("pending")
         state.loading = true;
       });
   }, 
