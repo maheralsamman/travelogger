@@ -96,10 +96,12 @@ const TripForm = ({ firstDraft, submit }) => {
                   maxLength={20}
               />
             </div>
-            <ImageUpload
-                fileUrl={currentStop.imageUrl}
-                setFileUrl={handleUpdateImage}
-            />
+            <div className={style.imageContainer}>
+                <ImageUpload
+                    fileUrl={currentStop.imageUrl}
+                    setFileUrl={handleUpdateImage}
+                />
+            </div>
             <input
                 value={currentStop.sublocation}
                 onChange={handleUpdateStop("sublocation")}

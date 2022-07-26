@@ -159,7 +159,7 @@ export const selectTrip = id => state => state.trips.trips.find(trip => trip._id
 
 export const selectTrips = searchTerm => state => searchTerm ?  state.trips.trips.filter(trip => {
   const regExp = new RegExp(searchTerm, "gi");
-  return regExp.test(trip.country) || regExp.test(trip.userName)
+  return regExp.test(trip.country) || regExp.test(trip.userName) || trip.stops.some(stop => regExp.test(stop.city))
 }) : state.trips.trips;
 
 // const thisTrip = useSelector(selectTrip(id))
